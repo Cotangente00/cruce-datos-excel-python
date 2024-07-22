@@ -1,0 +1,31 @@
+Function Cedula(J2 As Variant) As Variant
+    Dim resultado As Variant
+    resultado = Application.VLookup(J2, Sheets("Hoja1").Range("A:B"), 1, False)
+    If IsError(resultado) Then
+        Cedula = ""
+    Else
+        Cedula = resultado
+    End If
+End Function
+
+
+Function Profesional(J2 As Variant) As Variant
+    Dim resultado As Variant
+    resultado = Application.VLookup(J2, Sheets("Hoja1").Range("A:B"), 2, False)
+    If IsError(resultado) Then
+        Profesional = ""
+    Else
+        Profesional = resultado
+    End If
+End Function
+
+
+Function Profesional2(A3 As Variant) As Variant
+    Dim resultado As Variant
+    resultado = Application.VLookup(A3, Sheets("INFORME SOLICITUDES").Range("J:K"), 2, False)
+    If IsError(resultado) Then
+        Profesional2 = ""
+    Else
+        Profesional2 = resultado
+    End If
+End Function
