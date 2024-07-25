@@ -119,7 +119,7 @@ def no_service():
 
 # Configurar la interfaz gráfica
 root = tk.Tk()
-root.wm_title("Manualidades de Excel fuera")
+root.wm_title("Informe Solicitudes y Expertas Disponibles")
 root.geometry('320x240')
 icon_path = os.path.join(os.path.dirname(__file__), 'icon.ico')
 root.iconbitmap(icon_path)
