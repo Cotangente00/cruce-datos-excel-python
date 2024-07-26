@@ -19,32 +19,14 @@ def concatenar_nombres_apellidos(ws):
     ws.delete_cols(columna_eliminar, 1)  
 
 
-
-
-
-
-
-'''------Guardar datos de las columnas antes de eliminarlos------'''
-def guardar_datos_columnas(ws, columnas_eliminar):
-    datos_columnas = {}
-    for col_idx in columnas_eliminar:
-        columna_datos = []
-        for row in ws.iter_rows(min_row=5, min_col=col_idx, max_col=col_idx):
-            columna_datos.append(row[0].value)
-        datos_columnas[col_idx] = columna_datos
-    return datos_columnas
-
-
-'''------Eliminar columnas innecesarias------'''
+'''------Eliminar fecha y el resto de columnas innecesarias------'''
 def delete_columns(ws):
     #Columnas a eliminar: (C, F, G, H y I) Fecha, Sexo, localidad, número de celular y TCVA
     columnas_eliminar = [3, 5, 6, 7, 8, 9]
-
-    # Guardar los datos antes de eliminar las columnas
-    datos_columnas = guardar_datos_columnas(ws, columnas_eliminar)
-
     # Eliminar las columnas
     for col_idx in sorted(columnas_eliminar, reverse=True):
+        # Iterar en orden inverso para evitar problemas con los índices cambiando
+        col_letra = get_column_letter(col_idx)
         ws.delete_cols(col_idx)
 
     # Columna a eliminar: C, nuevamente para no dejar espacios vacíos
@@ -52,44 +34,6 @@ def delete_columns(ws):
 
     # Elimina la columna C (vacía)
     ws.delete_cols(columna_eliminar, 1)  
-
-    return datos_columnas
-
-
-'''------Restaurar columnas eliminadas (En caso de que el usuario quiera revertir los cambios)------'''
-def restaurar_columnas(ws, datos_columnas):
-    columnas_a_restaurar = sorted(datos_columnas.keys(), reverse=True)
-
-    for col_idx in columnas_a_restaurar:
-        # Insertar columna vacía en la posición correcta
-        ws.insert_cols(col_idx)
-        
-        # Recuperar los datos de la columna
-        datos = datos_columnas[col_idx]
-        
-        # Rellenar la columna con los datos recuperados
-        for row_idx, valor in enumerate(datos, start=5):
-            ws.cell(row=row_idx, column=col_idx, value=valor)
-
-
-
-
-
-
-
-
-'''------Guadar datos antes de moverlos a la celda D5, (en caso de que el usuario quiera revertir los cambios)------'''
-def guardar_datos_originales(ws):
-    datos_originales = {
-        'A': [],
-        'B': [],
-        'C': []
-    }
-    for fila in ws.iter_rows(min_row=5, max_col=3, values_only=True):
-        datos_originales['A'].append(fila[0])
-        datos_originales['B'].append(fila[1])
-        datos_originales['C'].append(fila[2])
-    return datos_originales
 
 
 '''------Mover datos a D5------'''
@@ -104,7 +48,7 @@ def move_data_to_D5(ws):
     hogares_pymes_cuidadoras_copiar = []
 
     # Iterar sobre las filas de la Hoja1
-    for fila in ws.iter_rows(min_row=5, values_only=True): # Se empieza a partir de la fila 5
+    for fila in ws.iter_rows(min_row=5, values_only=True): # Se empieza desde la celda A5
         cedula = fila[1 - 1] # columna A
         profesional = fila[2 - 1] # columna B
         hogares_pymes_cuidadoras = fila[3 - 1] # columna C
@@ -136,24 +80,3 @@ def move_data_to_D5(ws):
     for fila in ws.iter_rows():
         celda = fila[2]
         celda.value = None
-
-
-'''------Restaurar datos a la celda original A5 (en caso de que el usuario haya tomado la desición de revertir los cambios)------'''
-def restaurar_datos(ws, datos_originales):
-    for i, (cedula, profesional, hogares_pymes_cuidadoras) in enumerate(zip(
-            datos_originales['A'],
-            datos_originales['B'],
-            datos_originales['C']
-        ), start=5):
-        ws[f'A{i}'] = cedula
-        ws[f'B{i}'] = profesional
-        ws[f'C{i}'] = hogares_pymes_cuidadoras
-
-    for col in ['D', 'E', 'F']:
-        for fila in ws.iter_rows(min_row=5, max_col=ws.max_column):
-            ws[f'{col}{fila[0].row}'].value = None
-
-    ws.column_dimensions['D'].width = 12
-    ws.column_dimensions['E'].width = 45
-    ws.column_dimensions['F'].width = 18
-    ws.column_dimensions['H'].width = 45
