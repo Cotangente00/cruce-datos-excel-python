@@ -87,20 +87,23 @@ def move_data_to_D5(ws):
 
 '''------Sección para buscar coincidencias de la hoja INFORME SOLICITUDES------'''
 def encontrar_y_mover_coincidencias_cedulas(ws,ws2):
+    # Obtener los números de cédula y los nombres de la hoja Hoja1
+    cedulas_hoja1 = {}
+    for i in range(2, ws2.max_row + 1):
+        cedula = str(ws2[f'D{i}'].value)
+        nombre_apellido = ws2[f'E{i}'].value
+        cedulas_hoja1[cedula] = nombre_apellido
+
     # Obtener los números de cédula de la columna J de INFORME SOLICITUDES
-    cedulas_ws = {str(ws[f'J{i}'].value) for i in range(2, ws.max_row + 1)}
+    cedulas_informe = {str(ws[f'J{i}'].value) for i in range(2, ws.max_row + 1)}
 
-    # Obtener los números de cédula de la columna D de Hoja1
-    cedulas_ws2 = {str(ws2[f'D{i}'].value) for i in range(5, ws2.max_row + 1)}
-
-    # Encontrar coincidencias
-    coincidencias = cedulas_ws.intersection(cedulas_ws2)
-
-    # Insertar las coincidencias en la columna N de INFORME SOLICITUDES
+    # Insertar las coincidencias en la columna N y O de INFORME SOLICITUDES
     fila = 2
     for celda in ws['J']:
-        if str(celda.value) in coincidencias:
-            ws[f'M{celda.row}'] = celda.value
+        cedula = str(celda.value)
+        if cedula in cedulas_hoja1:
+            ws[f'M{celda.row}'] = float(cedula)
+            ws[f'N{celda.row}'] = cedulas_hoja1[cedula]
 
     #wb.save('Avance.xlsx')
 
