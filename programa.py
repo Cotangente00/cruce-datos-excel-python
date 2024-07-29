@@ -5,7 +5,6 @@ import os
 import openpyxl
 from manipular_INFORME_SOLICITUDES import *
 from manipular_Hoja1 import *
-from no_service import *
 import xlrd
 
 def procesar_INFORME_SOLICITUDES():
@@ -81,47 +80,24 @@ def procesar_Hoja1():
         concatenar_nombres_apellidos(ws)
         delete_columns(ws)   
         move_data_to_D5(ws)
-        encontrar_y_mover_coincidencias_cedulas(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+        encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+        encontrar_y_mover_coincidencias_nombres(ws,ws2) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+        no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+
+        ws['Q2'] = 'Expertas que NO tienen servicio'  
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
-        messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas innecesarias eliminadas, nombres y apellidos concatenados exitosamente y listado de expertas trasladados a la celda D5.")
+        messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas innecesarias eliminadas, nombres y apellidos concatenados exitosamente, BUSCARV aplicado en ambas hojas y listado Expertas que NO tienen servicios trasladado a las columnas Q y R.")
         abrir_excel(filepath)
     except Exception as e:
-        messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
-
-
-def no_service():
-    # Abrir el archivo Excel seleccionado
-    filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx")])
-    if not filepath:
-        return
-
-    try:
-        # Cargar el libro de Excel
-        wb = openpyxl.load_workbook(filepath)
-        # Seleccionar las hoja de trabajo
-        ws = wb['INFORME SOLICITUDES']
-        ws2 = wb['Hoja1']
-
-        # Aplicar las modificaciones utilizando Openpyxl
-        # Aquí se coloca la lógica para modificar los datos del archivo Excel
-        no_service_copypaste(ws, ws2) 
-        ws['Q2'] = 'Expertas que NO tienen servicio'  
-    
-
-        # Reescribir o guardar los cambios en el mismo archivo modificado 
-        wb.save(filepath)
-        messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: listado de expertas que NO tienen servicio ha sido copiado y pegado en las columnas Q y R")
-        abrir_excel(filepath)
-    except Exception as e:  
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
 
 
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-root.geometry('320x240')
+root.geometry('420x180')
 icon_path = os.path.join(os.path.dirname(__file__), 'icon.ico')
 root.iconbitmap(icon_path)
 
@@ -129,9 +105,6 @@ btn_procesar_informe_solicitudes = tk.Button(root, text="1. Procesar INFORME SOL
 btn_procesar_informe_solicitudes.pack(pady=20)
 
 btn_procesar_hoja1 = tk.Button(root, text="2. Procesar Hoja1", command=procesar_Hoja1)
-btn_procesar_hoja1.pack(pady=20)
-
-btn_procesar_hoja1 = tk.Button(root, text="3. Copiar y pegar las que NO tienen servicio", command=no_service)
 btn_procesar_hoja1.pack(pady=20)
 
 
