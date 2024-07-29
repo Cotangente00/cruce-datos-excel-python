@@ -1,4 +1,5 @@
 from openpyxl.utils.cell import get_column_letter
+import openpyxl
 
 '''------Concatenar nombres y apellidos------'''
 def concatenar_nombres_apellidos(ws):
@@ -80,3 +81,38 @@ def move_data_to_D5(ws):
     for fila in ws.iter_rows():
         celda = fila[2]
         celda.value = None
+
+
+
+
+'''------Sección para buscar coincidencias de la hoja INFORME SOLICITUDES------'''
+def encontrar_y_mover_coincidencias_cedulas(ws,ws2):
+    # Obtener los números de cédula de la columna J de INFORME SOLICITUDES
+    cedulas_ws = {str(ws[f'J{i}'].value) for i in range(2, ws.max_row + 1)}
+
+    # Obtener los números de cédula de la columna D de Hoja1
+    cedulas_ws2 = {str(ws2[f'D{i}'].value) for i in range(5, ws2.max_row + 1)}
+
+    # Encontrar coincidencias
+    coincidencias = cedulas_ws.intersection(cedulas_ws2)
+
+    # Insertar las coincidencias en la columna N de INFORME SOLICITUDES
+    fila = 2
+    for celda in ws['J']:
+        if str(celda.value) in coincidencias:
+            ws[f'M{celda.row}'] = celda.value
+
+    #wb.save('Avance.xlsx')
+
+'''
+# Cargar el libro de Excel
+wb = openpyxl.load_workbook('Avance.xlsx')
+
+# Seleccionar las hojas
+ws = wb["INFORME SOLICITUDES"]
+ws2 = wb["Hoja1"]
+
+encontrar_y_mover_coincidencias_cedulas(ws,ws2)
+encontrar_y_mover_coincidencias_nombres(ws,ws2)
+
+'''
