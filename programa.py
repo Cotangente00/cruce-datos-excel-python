@@ -74,13 +74,14 @@ def procesar_Hoja1():
         wb = openpyxl.load_workbook(filepath)
         # Seleccionar la hoja de trabajo
         ws = wb['Hoja1']
-        
+        ws2 = wb['INFORME SOLICITUDES']
 
         # Aplicar las modificaciones utilizando Openpyxl
         # Aquí se coloca la lógica para modificar los datos del archivo Excel
         concatenar_nombres_apellidos(ws)
         delete_columns(ws)   
-        move_data_to_D5(ws)     
+        move_data_to_D5(ws)
+        encontrar_y_mover_coincidencias_cedulas(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
