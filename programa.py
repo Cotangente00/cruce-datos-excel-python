@@ -84,7 +84,7 @@ def procesar_Hoja1():
         encontrar_y_mover_coincidencias_nombres(ws,ws2) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
         no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
-        ws['Q2'] = 'Expertas que NO tienen servicio'  
+        ws2['Q2'] = 'Expertas que NO tienen servicio'  
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
