@@ -150,18 +150,3 @@ def no_service_copypaste(ws,ws2):
     for i, (cedula, nombre) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio), start=1):
         ws[f'Q{i}'] = cedula
         ws[f'R{i}'] = nombre
-
-
-
-'''
-# Cargar el libro de Excel
-wb = openpyxl.load_workbook('Avance.xlsx')
-
-# Seleccionar las hojas
-ws = wb["INFORME SOLICITUDES"]
-ws2 = wb["Hoja1"]
-
-encontrar_y_mover_coincidencias_cedulas(ws,ws2)
-encontrar_y_mover_coincidencias_nombres(ws,ws2)
-
-'''
