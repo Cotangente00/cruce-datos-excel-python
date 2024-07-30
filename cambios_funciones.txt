@@ -1,0 +1,9 @@
+En este archivo se explicará de forma breve qué hace cada función de la aplicación por botones 
+
+BOTÓN 1. Procesar INFOME SOLICITUDES
+
+a. Función: delete_filas(ws)
+Esta función se encarga de eliminar las primeras 4 filas del archivo y así no dejar espacios en blanco
+
+b. Función: delete_ciudades_columnas(ws)
+Esta función elimina todas las filas que son innecesarias para el desarrollo del avance, estas columnas son: 
