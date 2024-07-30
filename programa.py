@@ -107,5 +107,4 @@ btn_procesar_informe_solicitudes.pack(pady=20)
 btn_procesar_hoja1 = tk.Button(root, text="2. Procesar Hoja1", command=procesar_Hoja1)
 btn_procesar_hoja1.pack(pady=20)
 
-
 root.mainloop() 

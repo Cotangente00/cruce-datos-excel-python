@@ -1,3 +1,10 @@
+(Deshabilitados temporalmente)
+
+Pasos para activar las funciones personalizadas de Excel 
+(CRTL-A ---> Opciones ----> Personalizar cinta de opciones ---> Personalizar la cinta de opciones ---> Programador✔)
+(Programador ---> Complementos de Excel ---> Examinar ---> Selecciona el complemento de Excel con las funciones personalizadas ---> Complemento de Excel✔ ---> Aceptar)
+
+
 Function Cedula(J2 As Variant) As Variant
     Dim resultado As Variant
     resultado = Application.VLookup(J2, Sheets("Hoja1").Range("A:B"), 1, False)
