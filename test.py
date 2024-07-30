@@ -1,6 +1,8 @@
 from openpyxl import load_workbook
+#wb = load_workbook('Avance.xlsx')
+#ws = wb['INFORME SOLICITUDES']
 
-def a_z():
+def a_z(ws):
     #Leer datos de la hoja (excluyendo los encabezados con min_row=2)
     datos = []
     for fila in ws.iter_rows(min_row=2, values_only=True):
@@ -13,3 +15,5 @@ def a_z():
     for i, fila in enumerate(datos_ordenados, star=2):
         for j, valor in enumerate(fila, star=1):
     ws.cell(row=i, column=j, value=valor)
+
+#wb.save()
