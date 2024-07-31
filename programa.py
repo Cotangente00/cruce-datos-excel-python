@@ -98,6 +98,7 @@ def procesar_Hoja1():
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
 root.geometry('420x180')
+app.resizable(width=False, height=False)
 icon_path = os.path.join(os.path.dirname(__file__), 'icon.ico')
 root.iconbitmap(icon_path)
 
