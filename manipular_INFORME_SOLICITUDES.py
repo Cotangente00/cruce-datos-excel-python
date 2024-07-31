@@ -57,9 +57,9 @@ def date_format(ws):
         cell.style = date_style
 
 
+
 '''------Sección para modificar el tamaño de las columnas y el aspecto------'''
 def styles_columnSize(ws):
-
     ws.column_dimensions['A'].width = 13
     ws.column_dimensions['B'].width = 20
     ws.column_dimensions['C'].width = 13
@@ -86,6 +86,7 @@ def styles_columnSize(ws):
             celda.font = estilo_negrita_subrayado
 
 
+
 '''------Sección para pasar todos lo números que están almacenados como texto a formato número------'''
 def int_format(ws):
     columnas_a_convertir = ['A', 'B', 'J']
@@ -100,6 +101,7 @@ def int_format(ws):
             except (ValueError, TypeError):
                 # Manejar el caso donde no se puede convertir a número
                 continue 
+
 
 
 '''------Sección para resaltar a todas las que tienen novedades (nombre y cédula) y crear una hoja nueva------'''
@@ -122,6 +124,25 @@ def novedades_expertas(ws):
 
     # Elimina la columna M (Tiene novedad) 
     ws.delete_cols(columna_eliminar, 1)  
+
+
+
+
+'''------Ordenar una tabla alfabéticamente, usando una columna como índice------'''
+def a_z(ws):
+    data = [] #Tupla para almacernar los datos 
+    for row in ws.iter_rows(min_row=2, values_only=True): #se empieza desde la fila dos por los encabezados
+        data.append((row[10], *row)) # row[10] columna K
+
+    #Se ordenan la lista de tuplas por el elemento o la columna K 
+    data.sort()
+
+    #Se escriben los datos ya ordenados alfabéticamente
+    for row_index, row_data in enumerate(data, start=2):
+        for column_index, cell_value in enumerate(row_data[1:], start=1):
+            ws.cell(row=row_index, column=column_index, value=cell_value)
+
+
 
 
 '''------Abrir archivo Excel automáticamente una vez hechos los cambios------'''

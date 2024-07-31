@@ -44,6 +44,8 @@ def procesar_INFORME_SOLICITUDES():
         styles_columnSize(ws)
         int_format(ws)
         novedades_expertas(ws)
+        a_z(ws)
+
          # Crea una nueva hoja llamada "Hoja1"
         hoja_nueva = wb.create_sheet("Hoja1")
 
@@ -98,7 +100,7 @@ def procesar_Hoja1():
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
 root.geometry('420x180')
-app.resizable(width=False, height=False)
+root.resizable(width=False, height=False)
 icon_path = os.path.join(os.path.dirname(__file__), 'icon.ico')
 root.iconbitmap(icon_path)
 
