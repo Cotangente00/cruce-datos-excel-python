@@ -7,7 +7,9 @@ Pasos para hacer un ejecutable CMD y usar la aplicación sin problemas:
 2. Copiar el contenido del archivo "ejecutar_programa.cmd" y pegarlo en el bloc de notas.
 3. Ajusta la ruta a la ubicación del programa con todas sus necesidades.
 4. Guardar el archivo como formato CMD (IMPORTANTE).
-5. Consideraciones: Tener Python instalado, tener todas las dependencias y librerías necesarias instaladas
+5. El archivo CMD tiene que estar ubicado en la ruta local de la aplicación.
+6. Click derecho en el archivo CMD para crear un acceso directo y ubicar este acceso directo a una ruta a convenir para un acceso eficaz
+7. Consideraciones: Tener Python instalado, tener todas las dependencias y librerías necesarias instaladas
 
 No hay entorno Virtual por las limitaciones que tienen configuradas los equipos de la empresa.
 
