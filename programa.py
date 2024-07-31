@@ -88,10 +88,16 @@ def procesar_Hoja1():
 
         ws2['Q2'] = 'Expertas que NO tienen servicio'  
 
+        # Pedir al usuario la ruta y nombre para guardar el nuevo archivo
+        filepath_save = filedialog.asksaveasfilename(title="Guardar archivo Excel modificado como", defaultextension=".xlsx", filetypes=[("Archivos Excel", "*.xlsx")])
+        if not filepath_save:
+            return  # Salir si el usuario cancela el diálogo de guardado
+
+
         # Reescribir o guardar los cambios en el mismo archivo modificado 
-        wb.save(filepath)
+        wb.save(filepath_save)
         messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas innecesarias eliminadas, nombres y apellidos concatenados exitosamente, BUSCARV aplicado en ambas hojas y listado Expertas que NO tienen servicios trasladado a las columnas Q y R.")
-        abrir_excel(filepath)
+        abrir_excel(filepath_save)
     except Exception as e:
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
 
