@@ -1,7 +1,6 @@
 La aplicación únicamente se puede ejecutar mediante un ambiente CMD, por limitaciones de los equipos de la empresa.
 La aplicación está pensada para ser incluida al SIC su uso será destinado exclusivamente a todas las gestoras de servicios pertenecientes al área de operaciones.
 
-
 Pasos para hacer un ejecutable CMD y usar la aplicación sin problemas:
 
 1. Abrir un bloc de notas.
@@ -9,7 +8,6 @@ Pasos para hacer un ejecutable CMD y usar la aplicación sin problemas:
 3. Ajusta la ruta a la ubicación del programa con todas sus necesidades.
 4. Guardar el archivo como formato CMD (IMPORTANTE).
 5. Consideraciones: Tener Python instalado, tener todas las dependencias y librerías necesarias instaladas
-
 
 No hay entorno Virtual por las limitaciones que tienen configuradas los equipos de la empresa.
 

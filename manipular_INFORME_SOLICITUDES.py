@@ -45,6 +45,7 @@ def delete_ciudades_columnas(ws):
 
     # Elimina la columna M (ciudades) 
     ws.delete_cols(columna_eliminar, 1)  
+    
 
 
 '''------Sección para conservar el formato de fecha corta------'''
