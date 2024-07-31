@@ -72,6 +72,7 @@ def styles_columnSize(ws):
     ws.column_dimensions['J'].width = 22
     ws.column_dimensions['K'].width = 45
     ws.column_dimensions['M'].width = 18
+    ws.column_dimensions['L'].width = 12
     ws.column_dimensions['N'].width = 45
     ws.row_dimensions[1].height= 20
 
