@@ -14,3 +14,5 @@ Pasos para hacer un ejecutable CMD y usar la aplicación sin problemas:
 No hay entorno Virtual por las limitaciones que tienen configuradas los equipos de la empresa.
 
 Comando para instalar todas las dependencias y librerías necesarias: pip install -r requirements.txt
+
+Comando para convertir correctamente el proyecto a un ejecutable .exe: pyinstaller --onefile --windowed --name="Informe de solicitudes y disponibilidad de expertas" --add-data "icon.ico;." programa.py
