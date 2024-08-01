@@ -77,6 +77,17 @@ def procesar_Hoja1():
         ws = wb['Hoja1']
         ws2 = wb['INFORME SOLICITUDES']
 
+        #buscar el marcador de modificación 
+        marcador = ws['AAA1'] #Marcador en la celda AD1
+        modificado_antes = marcador.value == 'MODIFICADO' 
+
+        if modificado_antes:
+            # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
+            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado anteriormente, si continua, el contenido del archivo será distorsionado. ¿Desea continuar?')
+            if not resultado:
+                return
+        
+
         # Aplicar las modificaciones utilizando Openpyxl
         # Aquí se coloca la lógica para modificar los datos del archivo Excel
         concatenar_nombres_apellidos(ws)
@@ -88,6 +99,8 @@ def procesar_Hoja1():
 
         ws2['Q2'] = 'Expertas que NO tienen servicio'  
 
+        #Agregar marcador de que el archivo ha sido modificado por la aplicación
+        ws['AAA1'] = 'MODIFICADO'
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
