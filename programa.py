@@ -60,7 +60,22 @@ def procesar_INFORME_SOLICITUDES():
 
         # Guardar el archivo modificado
         wb.save(filepath_save)
-        messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas inncesarias eliminadas, las ciudades de: Bogotá, Cota, Chía y Cajicá filtradas exitosamente y las expertas que SI tienen novedades han sido resaltadas con color amarillo.")
+        messagebox.showinfo("Proceso completado", """
+        - Se eliminaron las filas 1, 2, 3, y 4.
+        - Total servicios, Tipo, Turno partido, Jornada fija, 
+          Concepto: novedad y ausencias, Concepto: novedad 
+          control empleados, CC experta cambios, Experta cambio,
+          Notificación SMS, Notificación SMS cliente, SMS 
+          enviado cliente. Columnas eliminadas.
+        - Formato de fecha conservado DD/MM/YYYY.
+        - Tamaño horizontal de las columnas adaptado.
+        - Solicitud, Referencia Externa y Cédula modificada a 
+          formato numérico.
+        - Expertas que SI tienen novedad, resaltadas con color 
+          amarillo.
+        - Tabla ordenada alfabéticamente (con la colummna K 
+          como base).
+        """)
         abrir_excel(filepath_save)
     except Exception as e:
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
@@ -109,7 +124,19 @@ def procesar_Hoja1():
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
-        messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas innecesarias eliminadas, nombres y apellidos concatenados exitosamente, BUSCARV aplicado en ambas hojas y listado Expertas que NO tienen servicios trasladado a las columnas Q y R.")
+        messagebox.showinfo("Proceso completado", """
+        - Nombres y apellidos concatendados.
+        - Fecha, Sexo, localidad, número de celular y 
+          TCVA eliminadas.
+        - Datos trasladados a la celda D5.
+        - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
+          número de documento y nombre completo en 
+          las columnas M y N.
+        - BUSCARV desde INFORME SOLICITUDES a Hoja1 
+          nombre completo en la columna H.
+        - Listado de expertas sin servicio copiado en las 
+          columnas Q y R.
+        """)
         abrir_excel(filepath)
     except PermissionError:
         messagebox.showerror("Error de Permiso", f"No se puede modificar el archivo '{filepath}'. Asegúrate de que el archivo esté cerrado y que no esté siendo utilizado por otro programa.")
