@@ -7,6 +7,7 @@ from manipular_INFORME_SOLICITUDES import *
 from manipular_Hoja1 import *
 import xlrd
 import logging
+import sys
 
 def procesar_INFORME_SOLICITUDES():
     filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
@@ -82,12 +83,12 @@ def procesar_Hoja1():
         ws2 = wb['INFORME SOLICITUDES']
 
         #buscar el marcador de modificación 
-        marcador = ws['AAA1'] #Marcador en la celda AD1
+        marcador = ws['AZ1'] #Marcador en la celda AD1
         modificado_antes = marcador.value == 'MODIFICADO' 
 
         if modificado_antes:
             # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
-            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado anteriormente, si continua, el contenido del archivo será distorsionado. ¿Desea continuar?')
+            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado previamente, si continúa, el contenido del archivo será distorsionado. ¿Desea continuar?')
             if not resultado:
                 return
         
@@ -104,7 +105,7 @@ def procesar_Hoja1():
         ws2['Q2'] = 'Expertas que NO tienen servicio'  
 
         #Agregar marcador de que el archivo ha sido modificado por la aplicación
-        ws['AAA1'] = 'MODIFICADO'
+        ws['AZ1'] = 'MODIFICADO'
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
@@ -124,7 +125,17 @@ root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
 root.geometry('420x180')
 root.resizable(width=False, height=False)
-icon_path = os.path.join(os.path.dirname(__file__), 'icon.ico')
+
+def recurso_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
 
 btn_procesar_informe_solicitudes = tk.Button(root, text="1. Procesar INFORME SOLICITUDES", command=procesar_INFORME_SOLICITUDES)
