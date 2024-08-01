@@ -6,6 +6,7 @@ import openpyxl
 from manipular_INFORME_SOLICITUDES import *
 from manipular_Hoja1 import *
 import xlrd
+import logging
 
 def procesar_INFORME_SOLICITUDES():
     filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
@@ -63,6 +64,9 @@ def procesar_INFORME_SOLICITUDES():
     except Exception as e:
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
 
+# Configurar el logging para errores
+logging.basicConfig(filename='app.log', level=logging.ERROR)
+
 
 def procesar_Hoja1():
     # Abrir el archivo Excel seleccionado
@@ -77,6 +81,17 @@ def procesar_Hoja1():
         ws = wb['Hoja1']
         ws2 = wb['INFORME SOLICITUDES']
 
+        #buscar el marcador de modificación 
+        marcador = ws['AAA1'] #Marcador en la celda AD1
+        modificado_antes = marcador.value == 'MODIFICADO' 
+
+        if modificado_antes:
+            # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
+            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado anteriormente, si continua, el contenido del archivo será distorsionado. ¿Desea continuar?')
+            if not resultado:
+                return
+        
+
         # Aplicar las modificaciones utilizando Openpyxl
         # Aquí se coloca la lógica para modificar los datos del archivo Excel
         concatenar_nombres_apellidos(ws)
@@ -88,13 +103,20 @@ def procesar_Hoja1():
 
         ws2['Q2'] = 'Expertas que NO tienen servicio'  
 
+        #Agregar marcador de que el archivo ha sido modificado por la aplicación
+        ws['AAA1'] = 'MODIFICADO'
 
         # Reescribir o guardar los cambios en el mismo archivo modificado 
         wb.save(filepath)
         messagebox.showinfo("Proceso completado", "Modificaciones principales aplicadas: Columnas innecesarias eliminadas, nombres y apellidos concatenados exitosamente, BUSCARV aplicado en ambas hojas y listado Expertas que NO tienen servicios trasladado a las columnas Q y R.")
         abrir_excel(filepath)
+    except PermissionError:
+        messagebox.showerror("Error de Permiso", f"No se puede modificar el archivo '{filepath}'. Asegúrate de que el archivo esté cerrado y que no esté siendo utilizado por otro programa.")
+        logging.error(f"Error al abrir el archivo {filepath}: Permission denied")
+        return 
     except Exception as e:
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
+        return
 
 
 # Configurar la interfaz gráfica
