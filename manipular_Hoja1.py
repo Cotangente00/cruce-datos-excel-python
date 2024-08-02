@@ -135,18 +135,22 @@ def no_service_copypaste(ws,ws2):
     # Listas para almacenar cédulas y nombres completos
     cedulas_sin_servicio = []
     nombres_sin_servicio = []
+    tipo_sin_servicio = []
 
     # Iterar sobre las filas de la Hoja1
     for fila in ws2.iter_rows(min_row=2, values_only=True):  
         cedula = fila[4 - 1]  # Columna D, Python usa base cero
-        nombre = fila[5 - 1]  # Columna E, Python usa base cero
-        servicio = fila[8 - 1]  # Columna H, Python usa base cero
+        nombre = fila[5 - 1]  # Columna E
+        tipo = fila[6 - 1]  #Columna F 
+        servicio = fila[8 - 1]  # Columna H
 
         if servicio is None or servicio.strip() == "":
             cedulas_sin_servicio.append(cedula)
             nombres_sin_servicio.append(nombre)
+            tipo_sin_servicio.append(tipo)
 
     # Pegar los datos en la Hoja1, columnas Q y R
-    for i, (cedula, nombre) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio), start=1):
+    for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio, tipo_sin_servicio), start=1):
         ws[f'Q{i}'] = cedula
         ws[f'R{i}'] = nombre
+        ws[f'S{i}'] = tipo
