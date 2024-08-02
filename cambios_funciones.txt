@@ -13,20 +13,20 @@ c. Función: date_format
 Esta función conserva el formato de fecha en "DD/MM/YYYY"
 
 d. Función: styles_columnSize
-Esta función modifica el tamaño horizontal de las columnas para que encajen correctamente con el encabezado, además de subrayar y resaltarlos con Negrita
+Esta función modifica el tamaño horizontal de las columnas para que encajen correctamente con el encabezado, además de subrayar y resaltar los encabezados con Negrita
 
 e. Función: int_format
-Esta función manipula las columnas de: Solicitud, Referencia6 Externa y Cedula, ya que los datos de estas están almacenadas como texto, la funicón las convierte a format numérico
+Esta función manipula las columnas de: Solicitud, Referencia Externa y Cedula, ya que los datos de estas están almacenadas como texto, la función las convierte a formato numérico
 
 f. Función novedades_expertas
 Esta función filtra el número de cédula y el nombre de las expertas que SI tienen novedades, de la columna "Tiene novedad", resaltando las celdas con color amarillo, una vez resaltadas las expertas que si tienen novedad, automáticamente se elimina la columna de "Tiene Novedad"
 
 g. Función a_z
-Esta función se engarga de organizar todo el archivo por orden alfabético, utilizando la columna K que contiene los nombres y apellidos de las expertas sin alterar los datos ni las columnas restantes
+Esta función se encarga de organizar todo el archivo por orden alfabético, utilizando la columna K que contiene los nombres y apellidos de las expertas sin alterar los datos ni las columnas restantes
 
 
 h. Función abrir_excel
-Esta función se encarga de abrir el archivo Excel de forma automática después de finalizar loscambios que ejecuta cada botón de la aplicación
+Esta función se encarga de abrir el archivo Excel de forma automática después de finalizar los cambios que ejecuta cada botón de la aplicación
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -39,16 +39,16 @@ b. Función delete_columns
 Esta función elimina las columnas innecesarias para el desarrollo del avance: Fecha, Sexo, Localidad, número de celular y TCVA
 
 c. move_data_to_D5
-Esta función modifica el tamaño horizontal de las columnas para mayor comodidad y mueve el listado de expertasa la celda move_data_to_D5
+Esta función modifica el tamaño horizontal de las columnas para mayor comodidad y mueve el listado de expertas la celda move_data_to_D5.
 
 d. encontrar_y_mover_coincidencias_cedulas_y_nombres
-Esta función imita la fórmula de BUSCARV busca coincidencias exactas entre las cédulas de la hoja INFORME SOLICITUDES y Hoja1, los nombres y las cédulas que coincides, son ingresados a las columnas M y N respectivamente
+Esta función imita la fórmula de BUSCARV, busca coincidencias exactas entre las cédulas de la hoja INFORME SOLICITUDES y Hoja1, los nombres y las cédulas que coinciden, son ingresados a las columnas M y N respectivamente.
 
 e. encontrar_y_mover_coincidencias_nombres
-Esta función hace tiene casi la misma funcionalidad de la función anterior, con la diferencia de que ahora las coincidencias son ingresadas en la columna H de la Hoja1
+Esta función hace tiene casi la misma funcionalidad de la función anterior, con la diferencia de que ahora las coincidencias son ingresadas en la columna H de la Hoja1.
 
 f. no_service_copypaste
-Esta función filtra todas las expertas de la Hoja1 que NO tienen servicio e inserta sus respectivos números de cédula, nombres y apellidos a la hoja INFORME SOLICITUDES, posteriormente las gestoras pueden mover este listado a donde mejor les convenga para el avance.
+Esta función filtra todas las expertas de la Hoja1 que NO tienen servicio e inserta sus respectivos números de cédula, nombres completos y tipo de servicio a la hoja INFORME SOLICITUDES, posteriormente las gestoras pueden mover este listado a donde mejor les convenga para el avance.
 
 
 El botón 2. Procesar Hoja1 solamente lee archivos Excel en formato .xlsx ya que el botón 1. Procesar INFORME SOLICITUDES puede leer archivos .xls y .xlsx por igual, la diferencia es que al momento de guardar el botón lo guarda en formato .xlsx

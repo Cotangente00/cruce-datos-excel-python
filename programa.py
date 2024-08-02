@@ -135,7 +135,7 @@ def procesar_Hoja1():
         - BUSCARV desde INFORME SOLICITUDES a Hoja1 
           nombre completo en la columna H.
         - Listado de expertas sin servicio copiado en las 
-          columnas Q y R.
+          columnas Q, R y S.
         """)
         abrir_excel(filepath)
     except PermissionError:

@@ -149,7 +149,7 @@ def no_service_copypaste(ws,ws2):
             nombres_sin_servicio.append(nombre)
             tipo_sin_servicio.append(tipo)
 
-    # Pegar los datos en la Hoja1, columnas Q y R
+    # Pegar los datos en la Hoja1, columnas Q, R y S
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio, tipo_sin_servicio), start=1):
         ws[f'Q{i}'] = cedula
         ws[f'R{i}'] = nombre
