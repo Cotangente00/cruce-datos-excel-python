@@ -19,7 +19,7 @@ def delete_filas(ws):
 '''------Sección para eliminar columnas y ciudades innecesarias------'''
 def delete_ciudades_columnas(ws):
     #columnas innecesarias a eliminar
-    columnas_eliminar = ['C', 'D', 'J', 'K', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    columnas_eliminar = ['C', 'D', 'J', 'K', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
     # Eliminar las columnas
     for col in reversed(columnas_eliminar):
@@ -28,7 +28,7 @@ def delete_ciudades_columnas(ws):
         # Eliminar la columna utilizando el índice
         ws.delete_cols(col_idx)
 
-    ciudades_eliminar = ['Medellin', 'Cali', 'BUCARAMANGA', 'Medellín', 'PEREIRA', 'Barranquilla', 'BARRANQUILLA']
+    ciudades_eliminar = ['Medellin', 'Cali', 'BUCARAMANGA', 'Medellín', 'PEREIRA', 'Barranquilla', 'BARRANQUILLA', 'CARTAGENA', 'Cartagena']
     # Iterar sobre las filas y eliminar las que contienen las ciudades a eliminar
     filas_a_eliminar = []
     for row in ws.iter_rows(min_row=2):  # Empezamos desde la segunda fila (ya que en la primeera fila están los encabezados)
@@ -111,20 +111,20 @@ def novedades_expertas(ws):
     # Color de fondo amarillo
     relleno_amarillo = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-    # Recorrer las filas (empezando desde la segunda fila por los encabezados)
-    for fila in ws.iter_rows(min_row=2, min_col=10, max_col=11):  # Columnas J (10) y K (11)
-        novedad = ws.cell(row=fila[0].row, column=13).value  # Columna M (13)
+    # Recorrer las filas (empezando desde la quinta fila por los encabezados)
+    for fila in ws.iter_rows(min_row=5, min_col=14, max_col=15):  # Columnas N (14) y O (15)
+        novedad = ws.cell(row=fila[0].row, column=18).value  # Columna R (18)
 
         # Verificar si la columna "novedad" es "Si"
         if novedad == "Si":
-            # Aplicar formato de color amarillo a las celdas de nombre (J) y cedula (K)
+            # Aplicar formato de color amarillo a las celdas de nombre (N) y cedula (O)
             for celda in fila:
                 celda.fill = relleno_amarillo
 
     # Columna a eliminar: Tiene_novedad una vez resaltadas las que SI tienen novedades
-    columna_eliminar = 13
+    columna_eliminar = 18
 
-    # Elimina la columna M (Tiene novedad) 
+    # Elimina la columna R (Tiene novedad) 
     ws.delete_cols(columna_eliminar, 1)  
 
 
@@ -153,3 +153,12 @@ def abrir_excel(filepath):
         os.startfile(filepath)
     except OSError as e:
         print(f"No se pudo abrir el archivo '{filepath}': {e}")
+
+
+def ejecucion_funciones(ws):
+    novedades_expertas(ws)
+    delete_filas(ws)
+    delete_ciudades_columnas(ws)
+    date_format(ws)
+    styles_columnSize(ws)
+    int_format(ws)

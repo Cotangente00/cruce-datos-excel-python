@@ -40,13 +40,7 @@ def procesar_INFORME_SOLICITUDES():
         ws = wb.active
 
         # Aplicar las modificaciones utilizando Openpyxl
-        delete_filas(ws)
-        delete_ciudades_columnas(ws)
-        date_format(ws)
-        styles_columnSize(ws)
-        int_format(ws)
-        novedades_expertas(ws)
-        a_z(ws)
+        ejecucion_funciones(ws)
 
          # Crea una nueva hoja llamada "Hoja1"
         hoja_nueva = wb.create_sheet("Hoja1")
