@@ -144,6 +144,8 @@ def no_service_copypaste(ws,ws2):
         tipo = fila[6 - 1]  #Columna F 
         servicio = fila[8 - 1]  # Columna H
 
+
+        #Si el servicio (columna H) está vacío se almacenan los datos en las tuplas anteriormente definidas 
         if servicio is None or servicio.strip() == "":
             cedulas_sin_servicio.append(cedula)
             nombres_sin_servicio.append(nombre)
