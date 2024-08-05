@@ -39,13 +39,14 @@ def procesar_INFORME_SOLICITUDES():
         # Seleccionar la hoja de trabajo
         ws = wb.active
 
-        # Aplicar las modificaciones utilizando Openpyxl
+        # Función compuesta de funciones que ejecutan los cambios necesarios en la hoja INFORME SOLICITUDES
         ejecucion_funciones(ws)
 
-
+        #Volver a cargar las hojas del archivo después de ejecurtar los cambios en la hoja INFORME SOLICITUDES
         ws=wb['Hoja1']
         ws2=wb['INFORME SOLICITUDES']
 
+        # Funciones que hacen los cambios en la Hoja1
         concatenar_nombres_apellidos(ws)
         delete_columns(ws)   
         move_data_to_D5(ws)
@@ -98,7 +99,7 @@ def procesar_INFORME_SOLICITUDES():
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-root.geometry('420x180')
+root.geometry('420x80')
 root.resizable(width=False, height=False)
 
 def recurso_path(relative_path):
@@ -117,30 +118,3 @@ btn_procesar_informe_solicitudes = tk.Button(root, text="1. Procesar Archivo Exc
 btn_procesar_informe_solicitudes.pack(pady=20)
 
 root.mainloop() 
-
-
-'''
-messagebox.showinfo("Proceso completado", """
-        - Nombres y apellidos concatendados.
-        - Fecha, Sexo, localidad, número de celular y 
-          TCVA eliminadas.
-        - Datos trasladados a la celda D5.
-        - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
-          número de documento y nombre completo en 
-          las columnas M y N.
-        - BUSCARV desde INFORME SOLICITUDES a Hoja1 
-          nombre completo en la columna H.
-        - Listado de expertas sin servicio copiado en las 
-          columnas Q, R y S.
-        """)
-'''
-
-
-'''
-concatenar_nombres_apellidos(ws)
-delete_columns(ws)   
-move_data_to_D5(ws)
-encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-encontrar_y_mover_coincidencias_nombres(ws,ws2) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-'''

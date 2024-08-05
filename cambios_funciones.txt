@@ -21,11 +21,7 @@ Esta función manipula las columnas de: Solicitud, Referencia Externa y Cedula, 
 f. Función novedades_expertas
 Esta función filtra el número de cédula y el nombre de las expertas que SI tienen novedades, de la columna "Tiene novedad", resaltando las celdas con color amarillo, una vez resaltadas las expertas que si tienen novedad, automáticamente se elimina la columna de "Tiene Novedad"
 
-g. Función a_z
-Esta función se encarga de organizar todo el archivo por orden alfabético, utilizando la columna K que contiene los nombres y apellidos de las expertas sin alterar los datos ni las columnas restantes
-
-
-h. Función abrir_excel
+g. Función abrir_excel
 Esta función se encarga de abrir el archivo Excel de forma automática después de finalizar los cambios que ejecuta cada botón de la aplicación
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
