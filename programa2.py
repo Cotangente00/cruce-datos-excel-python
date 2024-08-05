@@ -39,6 +39,21 @@ def procesar_INFORME_SOLICITUDES():
         # Seleccionar la hoja de trabajo
         ws = wb.active
 
+        # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
+        confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5, para evitar dañar el contenido del archivo. ¿Desea continuar?')
+        if not confirmacion:
+            return
+        
+        #buscar el marcador de modificación 
+        marcador = ws['AZ1'] #Marcador en la celda AD1
+        modificado_antes = marcador.value == 'MODIFICADO' 
+
+        if modificado_antes:
+            # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
+            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado previamente, si continúa, el contenido del archivo será distorsionado. ¿Desea continuar?')
+            if not resultado:
+                return
+        
         # Función compuesta de funciones que ejecutan los cambios necesarios en la hoja INFORME SOLICITUDES
         ejecucion_funciones(ws)
 
@@ -55,7 +70,10 @@ def procesar_INFORME_SOLICITUDES():
         no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
 
-        ws2['Q2'] = 'Expertas que NO tienen servicio'  
+        ws2['Q2'] = 'Expertas que NO tienen servicio' 
+
+        #Agregar marcador de que el archivo ha sido modificado por la aplicación en la celdd AZ1        
+        ws2['AZ1'] = 'MODIFICADO' 
 
         # Pedir al usuario la ruta y nombre para guardar el nuevo archivo
         filepath_save = filedialog.asksaveasfilename(title="Guardar archivo Excel modificado como", defaultextension=".xlsx", filetypes=[("Archivos Excel", "*.xlsx")])
@@ -114,7 +132,7 @@ def recurso_path(relative_path):
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
 
-btn_procesar_informe_solicitudes = tk.Button(root, text="1. Procesar Archivo Excel", command=procesar_INFORME_SOLICITUDES)
+btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_INFORME_SOLICITUDES)
 btn_procesar_informe_solicitudes.pack(pady=20)
 
 root.mainloop() 
