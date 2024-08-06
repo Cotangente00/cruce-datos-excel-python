@@ -40,7 +40,7 @@ def procesar_INFORME_SOLICITUDES():
         ws = wb.active
 
         # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
-        confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5, para evitar dañar el contenido del archivo. ¿Desea continuar?')
+        confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5 de la hoja "Hoja1", para evitar dañar el contenido del archivo. ¿Desea continuar?')
         if not confirmacion:
             return
         

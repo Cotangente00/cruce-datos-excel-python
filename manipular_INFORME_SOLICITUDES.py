@@ -28,7 +28,7 @@ def delete_ciudades_columnas(ws):
         # Eliminar la columna utilizando el índice
         ws.delete_cols(col_idx)
 
-    ciudades_eliminar = ['Medellin', 'Cali', 'BUCARAMANGA', 'Medellín', 'PEREIRA', 'Barranquilla', 'BARRANQUILLA', 'CARTAGENA', 'Cartagena']
+    ciudades_eliminar = ['Medellin', 'Cali', 'CALI', 'BUCARAMANGA', 'Medellín', 'PEREIRA', 'Pereira', 'Barranquilla', 'BARRANQUILLA', 'CARTAGENA', 'Cartagena', 'ENVIGADO', 'Envigado', '', 'PALMIRA', 'Palmira', 'SANTA MARTA', 'Santa Marta']
     # Iterar sobre las filas y eliminar las que contienen las ciudades a eliminar
     filas_a_eliminar = []
     for row in ws.iter_rows(min_row=2):  # Empezamos desde la segunda fila (ya que en la primeera fila están los encabezados)
