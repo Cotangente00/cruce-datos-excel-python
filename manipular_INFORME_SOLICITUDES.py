@@ -28,17 +28,15 @@ def delete_ciudades_columnas(ws):
         # Eliminar la columna utilizando el índice
         ws.delete_cols(col_idx)
 
-    ciudades_eliminar = ['Medellin', 'Cali', 'CALI', 'BUCARAMANGA', 'Medellín', 'PEREIRA', 'Pereira', 'Barranquilla', 'BARRANQUILLA', 'CARTAGENA', 'Cartagena', 'ENVIGADO', 'Envigado', '', 'PALMIRA', 'Palmira', 'SANTA MARTA', 'Santa Marta']
-    # Iterar sobre las filas y eliminar las que contienen las ciudades a eliminar
-    filas_a_eliminar = []
-    for row in ws.iter_rows(min_row=2):  # Empezamos desde la segunda fila (ya que en la primeera fila están los encabezados)
-        ciudad = row[12].value  #ubicamos la columna de las ciudades M (índice 12)
-        if ciudad in ciudades_eliminar:
-            filas_a_eliminar.append(row)
+    ciudades_permitidas = ['Bogotá', 'Bogota', 'BOGOTA', 'BOGOTÁ', 'Cajica', 'Cajicá', 'CAJICA', 'CAJICÁ', 'Chía', 'CHÍA', 'Chia', 'CHIA', 'Cota', 'COTA', 'Soacha', 'SOACHA']
 
-    # Eliminar las filas identificadas
-    for row in filas_a_eliminar:
-        ws.delete_rows(row[0].row)  # row[0] es la celda en la primera columna (A) que contiene el número de fila
+    # Recorrer las filas en orden inverso para evitar problemas al eliminar filas
+    for row in range(ws.max_row, 1, -1):
+        ciudad = ws.cell(row=row, column=13).value # Obtener el valor de la Columna M (número 13) 
+        if ciudad not in ciudades_permitidas:
+            ws.delete_rows(row, 1)
+
+
 
     # Columna a eliminar: ciudades una vez descartadas las que NO se necesitan
     columna_eliminar = 13
