@@ -35,6 +35,8 @@ def delete_ciudades_columnas(ws):
         ciudad = ws.cell(row=row, column=13).value # Obtener el valor de la Columna M (número 13) 
         if ciudad not in ciudades_permitidas:
             ws.delete_rows(row, 1)
+        elif ciudad.lower() == 'soacha':
+            ws.cell(row=row, column=16).value = 'Soacha(Validar servicio)' # Columna P, pero con la eliminación de la columna M, pasa a ser la columna O
 
 
 
