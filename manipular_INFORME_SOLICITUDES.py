@@ -128,25 +128,6 @@ def novedades_expertas(ws):
     ws.delete_cols(columna_eliminar, 1)  
 
 
-
-
-'''------Ordenar una tabla alfabéticamente, usando una columna como índice------'''
-def a_z(ws):
-    data = [] #Tupla para almacernar los datos 
-    for row in ws.iter_rows(min_row=2, values_only=True): #se empieza desde la fila dos por los encabezados
-        data.append((row[10], *row)) # row[10] columna K
-
-    #Se ordenan la lista de tuplas por el elemento o la columna K 
-    data.sort()
-
-    #Se escriben los datos ya ordenados alfabéticamente
-    for row_index, row_data in enumerate(data, start=2):
-        for column_index, cell_value in enumerate(row_data[1:], start=1):
-            ws.cell(row=row_index, column=column_index, value=cell_value)
-
-
-
-
 '''------Abrir archivo Excel automáticamente una vez hechos los cambios------'''
 def abrir_excel(filepath):
     try:
