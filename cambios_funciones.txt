@@ -1,6 +1,10 @@
 En este archivo se explicará de forma breve qué hace cada función de la aplicación por botones 
 
-BOTÓN 1. Procesar INFOME SOLICITUDES
+BOTÓN Procesar Archivo Excel
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INFOME SOLICITUDES
+
 
 a. Función: delete_filas
 Esta función se encarga de eliminar las primeras 4 filas del archivo y así no dejar espacios en blanco
@@ -24,9 +28,12 @@ Esta función filtra el número de cédula y el nombre de las expertas que SI ti
 g. Función abrir_excel
 Esta función se encarga de abrir el archivo Excel de forma automática después de finalizar los cambios que ejecuta cada botón de la aplicación
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+h. Función ejecucion_funciones
+Esta función se encarga de ejecutar todas las funciones anteriormente mencionadas en un orden específico para evitar modificaciones que puedan modificar el archivo de forma negativa.
 
-Botón 2. Procesar Hoja1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hoja1
+
 
 a. Función concatenar_nombres_apellidos
 Como su nombre lo indica, esta función concatena las columnas B y C, las cuales contienen los nombres y apellidos de las expertas y al quedar la columna C vacía, esta se elimina automáticamente
@@ -47,4 +54,20 @@ f. no_service_copypaste
 Esta función filtra todas las expertas de la Hoja1 que NO tienen servicio e inserta sus respectivos números de cédula, nombres completos y tipo de servicio a la hoja INFORME SOLICITUDES, posteriormente las gestoras pueden mover este listado a donde mejor les convenga para el avance.
 
 
-El botón 2. Procesar Hoja1 solamente lee archivos Excel en formato .xlsx ya que el botón 1. Procesar INFORME SOLICITUDES puede leer archivos .xls y .xlsx por igual, la diferencia es que al momento de guardar el botón lo guarda en formato .xlsx
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Función que globaliza todas las funciones: procesar_archivo_excel
+Esta función es la que se encarga de que el único botón de la GUI funcione correctamente.
+
+a. Seleccionar archivo, la aplicación abre una ventana del explorador de windows para seleccionar el archivo Excel a modificar.
+
+b. Primera condicional, si el archivo está en formato .xls, se crea un archivo .xlsx y se pasa todo el contenido del archivo .xls a .xlsx.
+
+c. Dectectar Marcador, el código detecta si el archivo ya fue modificado anteriormente por la aplicación para evitar distorsionar los datos. Si es así, lanzará un mensaje de confirmación.
+
+d. Funciones, primero ejecuta las funciones del archivo manipular_INFORME_SOLICITUDES.py, posteriormente activa la hoja: Hoja1 e invierte su orden quedando como ws la 'Hoja1' y ws2 la hoja 'INFORME SOLICITUDES', seguido se ejecutan las funciones del archivo manipular_Hoja1.py 
+
+e. Marcadores, se un marcador para el listado de las expertas que no tienen servicio en la celda Q2, así mismo como un marcador que indica que el archivo que modificado por la aplicación en la celda AZ1.
+
+f. Guardar nuevo archivo, se abre una ventana del explorador de Windows para que el usuario pueda elegir a su conveniencia la ruta y nombrar este nuevo archivo generado.
+
+g. Una vez guardados los cambios, se abre una ventana informativa con todos los cambios generales ejecutados, para posteriormente la apartura del archivo de forma automática.
