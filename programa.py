@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, Label
 from tkinter import messagebox
 import os
 import openpyxl
@@ -9,7 +9,7 @@ import xlrd
 import logging
 import sys
 
-def procesar_INFORME_SOLICITUDES():
+def procesar_archivo_excel():
     filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
     if not filepath:
         return
@@ -39,13 +39,36 @@ def procesar_INFORME_SOLICITUDES():
         # Seleccionar la hoja de trabajo
         ws = wb.active
 
-        # Aplicar las modificaciones utilizando Openpyxl
+        # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
+        confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5 de la hoja "Hoja1", para evitar dañar el contenido del archivo. ¿Desea continuar?')
+        if not confirmacion:
+            return
+        
+        #buscar el marcador de modificación 
+        marcador = ws['AZ1'] #Marcador en la celda AD1
+        modificado_antes = marcador.value == 'MODIFICADO' 
+
+        if modificado_antes:
+            # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
+            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado previamente, si continúa, el contenido del archivo será distorsionado. ¿Desea continuar?')
+            if not resultado:
+                return
+        
+        # Función compuesta de funciones que ejecutan los cambios necesarios en la hoja INFORME SOLICITUDES
         ejecucion_funciones(ws)
 
-         # Crea una nueva hoja llamada "Hoja1"
-        hoja_nueva = wb.create_sheet("Hoja1")
+        #Volver a cargar las hojas del archivo después de ejecurtar los cambios en la hoja INFORME SOLICITUDES
+        ws=wb['Hoja1']
+        ws2=wb['INFORME SOLICITUDES']
 
-        hoja_nueva['A1'] = 'Pegar datos de expertas en la celda A5'
+        # Funciones que hacen los cambios en la Hoja1
+        ejecucion_funciones2(ws,ws2)
+
+
+        ws2['Q2'] = 'Expertas que NO tienen servicio' 
+
+        #Agregar marcador de que el archivo ha sido modificado por la aplicación en la celdd AZ1        
+        ws2['AZ1'] = 'MODIFICADO' 
 
         # Pedir al usuario la ruta y nombre para guardar el nuevo archivo
         filepath_save = filedialog.asksaveasfilename(title="Guardar archivo Excel modificado como", defaultextension=".xlsx", filetypes=[("Archivos Excel", "*.xlsx")])
@@ -55,6 +78,7 @@ def procesar_INFORME_SOLICITUDES():
         # Guardar el archivo modificado
         wb.save(filepath_save)
         messagebox.showinfo("Proceso completado", """
+        • Cambios en la hoja "INFORME SOLICITUDES":
         - Se eliminaron las filas 1, 2, 3, y 4.
         - Total servicios, Tipo, Turno partido, Jornada fija, 
           Concepto: novedad y ausencias, Concepto: novedad 
@@ -67,58 +91,7 @@ def procesar_INFORME_SOLICITUDES():
           formato numérico.
         - Expertas que SI tienen novedad, resaltadas con color 
           amarillo.
-        - Tabla ordenada alfabéticamente (con la colummna K 
-          como base).
-        """)
-        abrir_excel(filepath_save)
-    except Exception as e:
-        messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
-
-# Configurar el logging para errores
-logging.basicConfig(filename='app.log', level=logging.ERROR)
-
-
-def procesar_Hoja1():
-    # Abrir el archivo Excel seleccionado
-    filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx")])
-    if not filepath:
-        return
-
-    try:
-        # Cargar el libro de Excel
-        wb = openpyxl.load_workbook(filepath)
-        # Seleccionar la hoja de trabajo
-        ws = wb['Hoja1']
-        ws2 = wb['INFORME SOLICITUDES']
-
-        #buscar el marcador de modificación 
-        marcador = ws['AZ1'] #Marcador en la celda AD1
-        modificado_antes = marcador.value == 'MODIFICADO' 
-
-        if modificado_antes:
-            # Mensaje de confirmación si el archivo ha sido modificado por la aplicación previamente  
-            resultado = messagebox.askyesno('Confirmar modificación', 'Este archivo ya ha sido modificado previamente, si continúa, el contenido del archivo será distorsionado. ¿Desea continuar?')
-            if not resultado:
-                return
-        
-
-        # Aplicar las modificaciones utilizando Openpyxl
-        # Aquí se coloca la lógica para modificar los datos del archivo Excel
-        concatenar_nombres_apellidos(ws)
-        delete_columns(ws)   
-        move_data_to_D5(ws)
-        encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-        encontrar_y_mover_coincidencias_nombres(ws,ws2) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-        no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-
-        ws2['Q2'] = 'Expertas que NO tienen servicio'  
-
-        #Agregar marcador de que el archivo ha sido modificado por la aplicación
-        ws['AZ1'] = 'MODIFICADO'
-
-        # Reescribir o guardar los cambios en el mismo archivo modificado 
-        wb.save(filepath)
-        messagebox.showinfo("Proceso completado", """
+        • Cambios en la hoja "Hoja1":
         - Nombres y apellidos concatendados.
         - Fecha, Sexo, localidad, número de celular y 
           TCVA eliminadas.
@@ -131,22 +104,19 @@ def procesar_Hoja1():
         - Listado de expertas sin servicio copiado en las 
           columnas Q, R y S.
         """)
-        abrir_excel(filepath)
-    except PermissionError:
-        messagebox.showerror("Error de Permiso", f"No se puede modificar el archivo '{filepath}'. Asegúrate de que el archivo esté cerrado y que no esté siendo utilizado por otro programa.")
-        logging.error(f"Error al abrir el archivo {filepath}: Permission denied")
-        return 
+        abrir_excel(filepath_save)
     except Exception as e:
         messagebox.showerror("Error", f"Ha ocurrido un error al procesar el archivo:\n{str(e)}")
-        return
 
 
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-root.geometry('420x180')
+Label(root, text="Pegar todo el listado de expertas en la celda A5 de la hoja 'Hoja1'").pack(pady=10) 
+root.geometry('420x110')
 root.resizable(width=False, height=False)
 
+#Función para que el ícono de la ventana funcione correctamente en cojunto con el comando 
 def recurso_path(relative_path):
     try:
         base_path = sys._MEIPASS
@@ -158,11 +128,5 @@ def recurso_path(relative_path):
 
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
-
-btn_procesar_informe_solicitudes = tk.Button(root, text="1. Procesar INFORME SOLICITUDES", command=procesar_INFORME_SOLICITUDES)
-btn_procesar_informe_solicitudes.pack(pady=20)
-
-btn_procesar_hoja1 = tk.Button(root, text="2. Procesar Hoja1", command=procesar_Hoja1)
-btn_procesar_hoja1.pack(pady=20)
-
+btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel).pack(pady=20)
 root.mainloop() 
