@@ -1,5 +1,5 @@
 from openpyxl.utils.cell import get_column_letter
-import openpyxl
+
 
 '''------Concatenar nombres y apellidos------'''
 def concatenar_nombres_apellidos(ws):
@@ -105,8 +105,6 @@ def encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2):
             ws[f'M{celda.row}'] = float(cedula)
             ws[f'N{celda.row}'] = cedulas_hoja1[cedula]
 
-    #wb.save('Avance.xlsx')
-
 
 
 '''------Sección para buscar coincidencias de la hoja Hoja1------'''
@@ -156,3 +154,13 @@ def no_service_copypaste(ws,ws2):
         ws[f'Q{i}'] = cedula
         ws[f'R{i}'] = nombre
         ws[f'S{i}'] = tipo
+
+
+
+def ejecucion_funciones2(ws,ws2):
+    concatenar_nombres_apellidos(ws)
+    delete_columns(ws)
+    move_data_to_D5(ws)
+    encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    encontrar_y_mover_coincidencias_nombres(ws,ws2)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    no_service_copypaste(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
