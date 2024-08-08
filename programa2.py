@@ -9,7 +9,7 @@ import xlrd
 import logging
 import sys
 
-def procesar_INFORME_SOLICITUDES():
+def procesar_archivo_excel():
     filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
     if not filepath:
         return
@@ -132,7 +132,7 @@ def recurso_path(relative_path):
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
 
-btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_INFORME_SOLICITUDES)
+btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel)
 btn_procesar_informe_solicitudes.pack(pady=20)
 
 root.mainloop() 
