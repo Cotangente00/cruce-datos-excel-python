@@ -53,6 +53,9 @@ Esta función hace tiene casi la misma funcionalidad de la función anterior, co
 f. no_service_copypaste
 Esta función filtra todas las expertas de la Hoja1 que NO tienen servicio e inserta sus respectivos números de cédula, nombres completos y tipo de servicio a la hoja INFORME SOLICITUDES, posteriormente las gestoras pueden mover este listado a donde mejor les convenga para el avance.
 
+g. Función ejecucion_funciones2
+Esta función se encarga de ejecutar todas las funciones anteriormente mencionadas en un orden específico para evitar modificaciones que puedan modificar el archivo de forma negativa.
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Función que globaliza todas las funciones: procesar_archivo_excel
