@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, Label
 from tkinter import messagebox
 import os
 import openpyxl
@@ -112,9 +112,11 @@ def procesar_archivo_excel():
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-root.geometry('420x80')
+Label(root, text="Pegar todo el listado de expertas en la celda A5 de la hoja 'Hoja1'").pack(pady=10) 
+root.geometry('420x110')
 root.resizable(width=False, height=False)
 
+#Función para que el ícono de la ventana funcione correctamente en cojunto con el comando 
 def recurso_path(relative_path):
     try:
         base_path = sys._MEIPASS
@@ -126,8 +128,5 @@ def recurso_path(relative_path):
 
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
-
-btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel)
-btn_procesar_informe_solicitudes.pack(pady=20)
-
+btn_procesar_informe_solicitudes = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel).pack(pady=20)
 root.mainloop() 
