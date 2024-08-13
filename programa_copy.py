@@ -40,6 +40,7 @@ def procesar_archivo_excel():
 
         # Seleccionar la hoja de trabajo
         ws = wb.active
+  
 
         # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
         confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5 de la hoja "Hoja1", para evitar dañar el contenido del archivo. ¿Desea continuar?')
@@ -47,7 +48,7 @@ def procesar_archivo_excel():
             return
         
         #buscar el marcador de modificación 
-        marcador = ws['AZ1'] #Marcador en la celda AD1
+        marcador = ws['AZ1'] #Marcador en la celda AZ1
         modificado_antes = marcador.value == 'MODIFICADO' 
 
         if modificado_antes:
@@ -64,6 +65,7 @@ def procesar_archivo_excel():
         ws2=wb['INFORME SOLICITUDES']
 
         # Funciones que hacen los cambios en la Hoja1
+        find_table_and_move_to_A5(ws)
         ejecucion_funciones2(ws,ws2)
 
 
@@ -149,7 +151,7 @@ def procesar_archivo_excel_viernes_sabado():
             return
         
         #buscar el marcador de modificación 
-        marcador = ws['AZ1'] #Marcador en la celda AD1
+        marcador = ws['AZ1'] #Marcador en la celda AZ1
         modificado_antes = marcador.value == 'MODIFICADO' 
 
         if modificado_antes:
@@ -169,7 +171,7 @@ def procesar_archivo_excel_viernes_sabado():
         ejecucion_funciones2_viernes_sabado(ws,ws2)
 
 
-        ws2['Q2'] = 'Expertas que NO tienen servicio' 
+        ws2['R2'] = 'Expertas que NO tienen servicio' 
 
         #Agregar marcador de que el archivo ha sido modificado por la aplicación en la celda AZ1        
         ws2['AZ1'] = 'MODIFICADO' 
