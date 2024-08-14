@@ -56,8 +56,8 @@ def procesar_archivo_excel():
             cell_value = ws_xls.cell_value(row, col)
             ws_new.cell(row=row+1, column=col+1, value=cell_value)
 
-    # Eliminar la hoja predeterminada de Workbook
-    wb.remove(wb.active)
+      # Eliminar la hoja predeterminada de Workbook
+      wb.remove(wb.active)
       
 
     # Seleccionar la hoja de trabajo
