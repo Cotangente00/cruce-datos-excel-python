@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.debugpy",
+        "ms-python.python",
+        "randomfractalsinc.vscode-data-preview",
+        "vscode-icons-team.vscode-icons",
+        "googlecloudtools.cloudcode",
+        "grapecity.gc-excelviewer"
+    ]
+}
