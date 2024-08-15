@@ -40,7 +40,6 @@ def procesar_archivo_excel():
 
       os.remove('temp.xls')
 
-
     elif filepath.endswith('.xls'):
       # Cargar el libro de Excel (xls)
       xls_workbook = xlrd.open_workbook(filepath)
@@ -265,12 +264,11 @@ root.resizable(width=False, height=False)
 
 #Función para que el ícono de la ventana funcione correctamente en cojunto con el comando 
 def recurso_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
+  try:
+    base_path = sys._MEIPASS
+  except Exception:
+    base_path = os.path.abspath(".")
+  return os.path.join(base_path, relative_path)
 
 
 icon_path = recurso_path('icon.ico')
