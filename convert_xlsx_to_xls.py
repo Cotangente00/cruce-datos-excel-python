@@ -9,7 +9,7 @@ def convert_xlsx_to_xls(xlsx_file, xls_file):
     # Cargar el archivo .xlsx usando openpyxl
     wb_xlsx = openpyxl.load_workbook(xlsx_file)
     sheet_xlsx = wb_xlsx[wb_xlsx.sheetnames[1]]
-    find_table_and_move_to_A5(sheet_xlsx)
+    find_table_and_move_to_A5_xlsx(sheet_xlsx)
    
     # Crear un nuevo archivo .xls usando xlwt
     wb_xls = xlwt.Workbook()

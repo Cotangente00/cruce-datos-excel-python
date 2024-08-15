@@ -5,6 +5,7 @@
         "randomfractalsinc.vscode-data-preview",
         "vscode-icons-team.vscode-icons",
         "googlecloudtools.cloudcode",
-        "grapecity.gc-excelviewer"
+        "grapecity.gc-excelviewer",
+        "mhutchie.git-graph"
     ]
 }

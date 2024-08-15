@@ -43,8 +43,10 @@ def procesar_archivo_excel():
       os.remove('temp.xls')
 
     elif filepath.endswith('.xls'):
+
+      find_table_and_move_to_A5_xls(file_path, 'temp.xls')
       # Cargar el libro de Excel (xls)
-      xls_workbook = xlrd.open_workbook(filepath)
+      xls_workbook = xlrd.open_workbook('temp.xls')
       wb = openpyxl.Workbook()
 
       # Copiar hojas de xls a xlsx
@@ -59,6 +61,8 @@ def procesar_archivo_excel():
 
       # Eliminar la hoja predeterminada de Workbook
       wb.remove(wb.active)
+
+      os.remove('temp.xls')
       
 
     # Seleccionar la hoja de trabajo
