@@ -37,6 +37,8 @@ def procesar_archivo_excel():
           for col in range(ws_xls.ncols):
             cell_value = ws_xls.cell_value(row, col)
             ws_new.cell(row=row+1, column=col+1, value=cell_value)
+            
+      wb.remove(wb.active)
 
       os.remove('temp.xls')
 
@@ -160,6 +162,8 @@ def procesar_archivo_excel_viernes_sabado():
           for col in range(ws_xls.ncols):
             cell_value = ws_xls.cell_value(row, col)
             ws_new.cell(row=row+1, column=col+1, value=cell_value)
+            
+      wb.remove(wb.active)
 
       os.remove('temp.xls')
         
