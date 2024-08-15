@@ -217,9 +217,9 @@ def no_service_copypaste(ws,ws2):
 
     # Pegar los datos en la Hoja1, columnas Q, R y S
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio, tipo_sin_servicio), start=1):
-        ws[f'Q{i}'] = cedula
-        ws[f'R{i}'] = nombre
-        ws[f'S{i}'] = tipo
+        ws[f'R{i}'] = cedula
+        ws[f'S{i}'] = nombre
+        ws[f'T{i}'] = tipo
 
 def no_service_copypaste_viernes_sabado(ws,ws2):
     # Listas para almacenar cédulas y nombres completos
@@ -253,12 +253,50 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
 
     # Pegar los datos en la Hoja1, columnas Q, R y S
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio_horas, nombres_sin_servicio_horas, tipo_sin_servicio_horas), start=4):
-        ws[f'Q{i}'] = cedula
-        ws[f'R{i}'] = nombre
-        ws[f'S{i}'] = tipo
+        ws[f'R{i}'] = cedula
+        ws[f'S{i}'] = nombre
+        ws[f'T{i}'] = tipo
 
 
+'''------Función para encontrar la tabla y moverla a la celda A5------'''
+def find_table_and_move_to_A5(ws):
 
+    inicio_fila = None
+    inicio_columna = None
+    for fila in ws.iter_rows(min_row=1, max_col=ws.max_column):
+        for cell in fila:
+            if cell.value is not None:
+                inicio_fila = cell.row
+                inicio_columna = cell.column
+                break
+        if inicio_fila:        
+            break
+    
+    # Si no se encontró la tabla, no hacer nada
+    if inicio_fila is None or inicio_columna is None:
+        print("No se encontró la tabla en la hoja 'Hoja1'.")
+        return
+    
+    # Obtener los datos de la tabla
+    datos_tabla = []
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 10):
+        fila_datos = [cell.value for cell in fila]
+        if all(cell is None for cell in fila_datos):
+            break
+        datos_tabla.append(fila_datos)
+    
+    # Limpiar la tabla existente
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 10):
+        for cell in fila:
+            cell.value = None
+    
+    # Colocar los datos a partir de A5
+    for i, fila_datos in enumerate(datos_tabla):
+        for j, valor in enumerate(fila_datos):
+            ws.cell(row=5+i, column=1+j).value = valor
+
+
+'''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
 def ejecucion_funciones2(ws,ws2):
     concatenar_nombres_apellidos(ws)
     delete_columns(ws)
@@ -267,6 +305,9 @@ def ejecucion_funciones2(ws,ws2):
     encontrar_y_mover_coincidencias_nombres(ws,ws2)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     no_service_copypaste(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
+
+
+'''------Función que globaliza todas las funciones anteriormenete definidas (VIERNES-SÁBADO)-------'''
 def ejecucion_funciones2_viernes_sabado(ws,ws2):
     concatenar_nombres_apellidos(ws)
     delete_columns_viernes_sabado(ws)
