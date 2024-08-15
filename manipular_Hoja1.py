@@ -153,45 +153,34 @@ def move_data_to_D5_viernes_sabado(ws):
 
 '''------Sección para buscar coincidencias de la hoja INFORME SOLICITUDES------'''
 def encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2):
-    # Obtener los números de cédula y los nombres de la hoja Hoja1
-    cedulas_hoja1 = {}
-    for i in range(2, ws2.max_row + 1):
-        cedula = str(ws2[f'D{i}'].value)
-        nombre_apellido = ws2[f'E{i}'].value
-        cedulas_hoja1[cedula] = nombre_apellido
+    # Iterar sobre las filas de la hoja de informe, comenzando desde la fila 2 (excluyendo el encabezado)
+    for fila_informe in ws2.iter_rows(min_row=2, max_col=ws2.max_column):
+        numero_documento_informe = fila_informe[9].value  # Columna J (índice 9)
 
-    # Obtener los números de cédula de la columna J de INFORME SOLICITUDES
-    cedulas_informe = {str(ws[f'J{i}'].value) for i in range(2, ws.max_row + 1)}
+        # Iterar sobre las filas de la hoja Hoja1, comenzando desde la fila 5 (excluyendo el encabezado)
+        for fila_hoja1 in ws.iter_rows(min_row=5, max_col=ws.max_column):
+            numero_documento_hoja1 = fila_hoja1[3].value  # Columna D (índice 3)
 
-    # Insertar las coincidencias en la columna N y O de INFORME SOLICITUDES
-    fila = 2
-    for celda in ws['J']:
-        cedula = str(celda.value)
-        if cedula in cedulas_hoja1:
-            ws[f'M{celda.row}'] = float(cedula)
-            ws[f'N{celda.row}'] = cedulas_hoja1[cedula]
-
+            # Si se encuentra una coincidencia, copiar los datos a la hoja de informe
+            if numero_documento_informe == numero_documento_hoja1:
+                fila_informe[12].value = fila_hoja1[3].value  # Columna M (índice 12)
+                fila_informe[13].value = fila_hoja1[4].value  # Columna N (índice 13)
 
 
 '''------Sección para buscar coincidencias de la hoja Hoja1------'''
-def encontrar_y_mover_coincidencias_nombres(ws2,ws):
-    # Obtener los números de cédula y los nombres de la hoja INFORME SOLICITUDES
-    cedulas_INFORME_SOLICITUDES = {}
-    for i in range(2, ws.max_row + 1):
-        cedula = str(ws[f'J{i}'].value)
-        nombre_apellido = ws[f'K{i}'].value
-        cedulas_INFORME_SOLICITUDES[cedula] = nombre_apellido
+def encontrar_y_mover_coincidencias_nombres(ws,ws2):
 
-    # Obtener los números de cédula de la columna D de Hoja1
-    cedulas_Hoja1 = {str(ws2[f'D{i}'].value) for i in range(2, ws.max_row + 1)}
+    # Iterar sobre las filas de la hoja Hoja1, comenzando desde la fila 5 
+    for fila_hoja1 in ws.iter_rows(min_row=5, min_col=1, max_col=10):
+        numero_documento_hoja1 = fila_hoja1[3].value  # Columna D (índice 3)
 
-    # Insertar las coincidencias en la columna H de Hoja1
-    fila = 5
-    for celda in ws2['D']:
-        cedula = str(celda.value)
-        if cedula in cedulas_INFORME_SOLICITUDES:
-            ws2[f'H{celda.row}'] = cedulas_INFORME_SOLICITUDES[cedula]
+        # Iterar sobre las filas de la hoja INFORME SOLCITUDES, comenzando desde la fila 2 
+        for fila_informe in ws2.iter_rows(min_row=2, max_col=ws2.max_column):
+            numero_documento_informe = fila_informe[9].value  # Columna J (índice 9)
 
+            # Si se encuentra una coincidencia, copiar los datos a la hoja de informe
+            if numero_documento_hoja1 == numero_documento_informe:
+                fila_hoja1[7].value = fila_informe[10].value  
 
 
 '''------Sección para copiar  y pegar todas las expertas que NO tienen servicio------'''
@@ -301,9 +290,9 @@ def ejecucion_funciones2(ws,ws2):
     concatenar_nombres_apellidos(ws)
     delete_columns(ws)
     move_data_to_D5(ws)
-    encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-    encontrar_y_mover_coincidencias_nombres(ws,ws2)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
-    no_service_copypaste(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2)
+    encontrar_y_mover_coincidencias_nombres(ws,ws2)
+    no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
 
 
@@ -312,6 +301,6 @@ def ejecucion_funciones2_viernes_sabado(ws,ws2):
     concatenar_nombres_apellidos(ws)
     delete_columns_viernes_sabado(ws)
     move_data_to_D5_viernes_sabado(ws)
-    encontrar_y_mover_coincidencias_cedulas_y_nombres(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     encontrar_y_mover_coincidencias_nombres(ws,ws2)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     no_service_copypaste_viernes_sabado(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
