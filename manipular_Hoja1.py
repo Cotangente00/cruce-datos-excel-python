@@ -250,6 +250,7 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
 '''------Función para encontrar la tabla y moverla a la celda A5------'''
 def find_table_and_move_to_A5(ws):
 
+    # Encontrar la tabla en la hoja 'Hoja1'
     inicio_fila = None
     inicio_columna = None
     for fila in ws.iter_rows(min_row=1, max_col=ws.max_column):
