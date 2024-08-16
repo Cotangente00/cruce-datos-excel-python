@@ -46,7 +46,7 @@ def procesar_archivo_excel():
 
     elif filepath.endswith('.xls'):
 
-      find_table_and_move_to_A5_xls(file_path, 'temp.xls')
+      find_table_and_move_to_A5_xls(filepath, 'temp.xls')
       # Cargar el libro de Excel (xls)
       xls_workbook = xlrd.open_workbook('temp.xls')
       wb = openpyxl.Workbook()
