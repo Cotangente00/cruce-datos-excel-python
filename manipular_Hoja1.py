@@ -2,6 +2,7 @@ from openpyxl.utils.cell import get_column_letter
 import xlrd
 import xlwt
 from xlutils.copy import copy
+from openpyxl.styles import NamedStyle
 
 
 '''------Concatenar nombres y apellidos------'''
@@ -238,12 +239,43 @@ def find_table_and_move_to_A5_xls(file_path, temp):
 
 
 
+'''------Función para organizar la tabla alfabéticamente, usando la columna N como índice o base del ordenamiento------'''
+def organizar_tabla_alfabeticamente(ws2):
+    # Obtener todos los datos de la hoja
+    data = []
+    for row in ws2.iter_rows(min_row=2, values_only=True):
+        data.append(list(row))
+
+
+    # Ordenar los datos por la columna N (índice 13), colocando los valores None al final
+    data.sort(key=lambda x: (x[13] is None, x[13]))
+
+    # Limpiar la hoja y escribir los datos ordenados a partir de la fila 2
+    ws2.delete_rows(2, ws2.max_row)
+    for i, row in enumerate(data, start=2):  # Comenzamos el índice en 2
+        ws2.cell(row=i, column=1, value=row[0])
+        ws2.cell(row=i, column=2, value=row[1])
+        ws2.cell(row=i, column=3, value=row[2])
+        ws2.cell(row=i, column=4, value=row[3])
+        ws2.cell(row=i, column=5, value=row[4])
+        ws2.cell(row=i, column=6, value=row[5])
+        ws2.cell(row=i, column=7, value=row[6])
+        ws2.cell(row=i, column=8, value=row[7])
+        ws2.cell(row=i, column=9, value=row[8])
+        ws2.cell(row=i, column=10, value=row[9])
+        ws2.cell(row=i, column=11, value=row[10])
+        ws2.cell(row=i, column=12, value=row[11])
+        ws2.cell(row=i, column=13, value=row[12])
+        ws2.cell(row=i, column=14, value=row[13])
+    
+
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
 def ejecucion_funciones2(ws,ws2):
     concatenar_nombres_apellidos(ws)
     delete_columns(ws)
     move_data_to_D5(ws)
     encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2)
+    organizar_tabla_alfabeticamente(ws2)
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
 
