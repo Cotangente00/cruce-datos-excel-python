@@ -90,8 +90,8 @@ def procesar_archivo_excel():
     ejecucion_funciones(ws)
 
     #Volver a cargar las hojas del archivo después de ejecurtar los cambios en la hoja INFORME SOLICITUDES
-    ws=wb['Hoja1']
-    ws2=wb['INFORME SOLICITUDES']
+    ws=wb[wb.sheetnames[1]]
+    ws2=wb[wb.sheetnames[0]]
 
     # Funciones que hacen los cambios en la Hoja1 
     ejecucion_funciones2(ws,ws2)
@@ -218,8 +218,8 @@ def procesar_archivo_excel_viernes_sabado():
     ejecucion_funciones(ws)
 
     #Volver a cargar las hojas del archivo después de ejecurtar los cambios en la hoja INFORME SOLICITUDES
-    ws=wb['Hoja1']
-    ws2=wb['INFORME SOLICITUDES']
+    ws=wb[wb.sheetnames[1]]
+    ws2=wb[wb.sheetnames[0]]
 
     # Funciones que hacen los cambios en la Hoja1
     ejecucion_funciones2_viernes_sabado(ws,ws2)

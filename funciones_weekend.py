@@ -156,7 +156,7 @@ def find_table_and_move_to_A5_xlsx_viernes_sabado(ws):
 def find_table_and_move_to_A5_xls_viernes_sabado(file_path, temp):
     # Abrir el archivo .xls en modo lectura
     wb_rd = xlrd.open_workbook(file_path, formatting_info=True)
-    ws_rd = wb_rd.sheet_by_name('Hoja1')
+    ws_rd = wb_rd.sheet_by_index(1)
 
     # Encontrar la tabla en la hoja 'Hoja1'
     inicio_fila = None
