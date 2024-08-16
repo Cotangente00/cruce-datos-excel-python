@@ -113,6 +113,96 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
         ws[f'S{i}'] = nombre
         ws[f'T{i}'] = tipo
 
+'''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xlsx)------'''
+def find_table_and_move_to_A5_xlsx_viernes_sabado(ws):
+
+    # Encontrar la tabla en la hoja 'Hoja1'
+    inicio_fila = None
+    inicio_columna = None
+    for fila in ws.iter_rows(min_row=1, max_col=ws.max_column):
+        for cell in fila:
+            if cell.value is not None:
+                inicio_fila = cell.row
+                inicio_columna = cell.column
+                break
+        if inicio_fila:        
+            break
+    
+    # Si no se encontró la tabla, no hacer nada
+    if inicio_fila is None or inicio_columna is None:
+        print("No se encontró la tabla en la hoja 'Hoja1'.")
+        return
+    
+    # Obtener los datos de la tabla
+    datos_tabla = []
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 12):
+        fila_datos = [cell.value for cell in fila]
+        if all(cell is None for cell in fila_datos):
+            break
+        datos_tabla.append(fila_datos)
+    
+    # Limpiar la tabla existente
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 12):
+        for cell in fila:
+            cell.value = None
+    
+    # Colocar los datos a partir de A5
+    for i, fila_datos in enumerate(datos_tabla):
+        for j, valor in enumerate(fila_datos):
+            ws.cell(row=5+i, column=1+j).value = valor
+
+
+'''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xls)------'''
+def find_table_and_move_to_A5_xls_viernes_sabado(file_path, temp):
+    # Abrir el archivo .xls en modo lectura
+    wb_rd = xlrd.open_workbook(file_path, formatting_info=True)
+    ws_rd = wb_rd.sheet_by_name('Hoja1')
+
+    # Encontrar la tabla en la hoja 'Hoja1'
+    inicio_fila = None
+    inicio_columna = None
+
+    for row_idx in range(ws_rd.nrows):
+        for col_idx in range(ws_rd.ncols):
+            if ws_rd.cell_value(row_idx, col_idx) not in (None, ''):
+                inicio_fila = row_idx
+                inicio_columna = col_idx
+                break
+        if inicio_fila is not None:
+            break
+
+    # Si no se encontró la tabla, no hacer nada
+    if inicio_fila is None or inicio_columna is None:
+        print("No se encontró la tabla en la hoja 'Hoja1'.")
+        return
+
+    # Obtener los datos de la tabla
+    datos_tabla = []
+    for row_idx in range(inicio_fila, ws_rd.nrows):
+        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 13)
+        if all(cell in (None, '') for cell in fila_datos):
+            break
+        datos_tabla.append(fila_datos)
+
+    # Crear una copia del archivo .xls para modificarlo
+    wb_wr = copy(wb_rd)
+    ws_wr = wb_wr.get_sheet('Hoja1')
+
+    # Limpiar la tabla existente
+    for row_idx in range(inicio_fila, inicio_fila + len(datos_tabla)):
+        for col_idx in range(inicio_columna, inicio_columna + 13):
+            ws_wr.write(row_idx, col_idx, '')
+
+    # Colocar los datos a partir de A5
+    for i, fila_datos in enumerate(datos_tabla):
+        for j, valor in enumerate(fila_datos):
+            ws_wr.write(4 + i, j, valor)
+
+    # Guardar los cambios en el archivo .xls
+    wb_wr.save(temp)
+
+
+
 
 '''------Función que globaliza todas las funciones anteriormenete definidas (VIERNES-SÁBADO)-------'''
 def ejecucion_funciones2_viernes_sabado(ws,ws2):
