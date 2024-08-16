@@ -11,6 +11,8 @@ import sys
 import os
 import xlwt
 from convert_xlsx_to_xls import *
+from funciones_weekend import *
+
 
 '''------Función para Lunes a Jueves------'''
 def procesar_archivo_excel():
@@ -43,8 +45,10 @@ def procesar_archivo_excel():
       os.remove('temp.xls')
 
     elif filepath.endswith('.xls'):
+
+      find_table_and_move_to_A5_xls(filepath, 'temp.xls')
       # Cargar el libro de Excel (xls)
-      xls_workbook = xlrd.open_workbook(filepath)
+      xls_workbook = xlrd.open_workbook('temp.xls')
       wb = openpyxl.Workbook()
 
       # Copiar hojas de xls a xlsx
@@ -59,6 +63,8 @@ def procesar_archivo_excel():
 
       # Eliminar la hoja predeterminada de Workbook
       wb.remove(wb.active)
+
+      os.remove('temp.xls')
       
 
     # Seleccionar la hoja de trabajo
@@ -147,7 +153,7 @@ def procesar_archivo_excel_viernes_sabado():
     if filepath.endswith('.xlsx'):
 
       #convertir de xlsx a xls para convertirlo de vuelta
-      convert_xlsx_to_xls(filepath, 'temp.xls')
+      convert_xlsx_to_xls_viernes_sabado(filepath, 'temp.xls')
 
       # Cargar el libro de Excel (xls)
       xls_workbook = xlrd.open_workbook('temp.xls')
@@ -169,8 +175,10 @@ def procesar_archivo_excel_viernes_sabado():
         
     
     elif filepath.endswith('.xls'):
+      
+      find_table_and_move_to_A5_xls_viernes_sabado(filepath, 'temp.xls')
       # Cargar el libro de Excel (xls)
-      xls_workbook = xlrd.open_workbook(filepath)
+      xls_workbook = xlrd.open_workbook('temp.xls')
       wb = openpyxl.Workbook()
 
       # Copiar hojas de xls a xlsx
@@ -185,6 +193,8 @@ def procesar_archivo_excel_viernes_sabado():
 
       # Eliminar la hoja predeterminada de Workbook
       wb.remove(wb.active)
+      
+      os.remove('temp.xls')
 
     # Seleccionar la hoja de trabajo
     ws = wb.active
