@@ -11,6 +11,8 @@ import sys
 import os
 import xlwt
 from convert_xlsx_to_xls import *
+from funciones_weekend import *
+
 
 '''------Función para Lunes a Jueves------'''
 def procesar_archivo_excel():
