@@ -187,7 +187,7 @@ def find_table_and_move_to_A5_xlsx(ws):
             ws.cell(row=5+i, column=1+j).value = valor
 
 
-'''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xlsx)------'''
+'''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xls)------'''
 def find_table_and_move_to_A5_xls(file_path, temp):
     # Abrir el archivo .xls en modo lectura
     wb_rd = xlrd.open_workbook(file_path, formatting_info=True)
