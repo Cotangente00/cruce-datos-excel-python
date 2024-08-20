@@ -19,7 +19,7 @@ def delete_filas(ws):
 '''------Sección para eliminar columnas y ciudades innecesarias------'''
 def delete_ciudades_columnas(ws):
     #columnas innecesarias a eliminar
-    columnas_eliminar = ['C', 'D', 'J', 'K', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    columnas_eliminar = ['C', 'D', 'J', 'K', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
     # Eliminar las columnas
     for col in reversed(columnas_eliminar):
@@ -113,8 +113,8 @@ def novedades_expertas(ws):
     relleno_amarillo = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
     # Recorrer las filas (empezando desde la quinta fila por los encabezados)
-    for fila in ws.iter_rows(min_row=5, min_col=14, max_col=15):  # Columnas N (14) y O (15)
-        novedad = ws.cell(row=fila[0].row, column=18).value  # Columna R (18)
+    for fila in ws.iter_rows(min_row=5, min_col=10, max_col=11):  # Columnas N (14) y O (15)
+        novedad = ws.cell(row=fila[0].row, column=13).value  # Columna M (13)
 
         # Verificar si la columna "novedad" es "Si"
         if novedad == "Si":
@@ -123,7 +123,7 @@ def novedades_expertas(ws):
                 celda.fill = relleno_amarillo
 
     # Columna a eliminar: Tiene_novedad una vez resaltadas las que SI tienen novedades
-    columna_eliminar = 18
+    columna_eliminar = 13
 
     # Elimina la columna R (Tiene novedad) 
     ws.delete_cols(columna_eliminar, 1)  
@@ -138,7 +138,6 @@ def abrir_excel(filepath):
 
 
 def ejecucion_funciones(ws):
-    novedades_expertas(ws)
     delete_filas(ws)
     delete_ciudades_columnas(ws)
     date_format(ws)
