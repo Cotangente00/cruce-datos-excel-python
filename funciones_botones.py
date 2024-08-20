@@ -17,12 +17,6 @@ from funciones_weekend import *
 def button_lunes_jueves(wb):
   # Seleccionar la hoja de trabajo
   ws = wb.active
-
-
-  # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
-  confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5 de la hoja "Hoja1", para evitar dañar el contenido del archivo. ¿Desea continuar?')
-  if not confirmacion:
-    return
           
   #buscar el marcador de modificación 
   marcador = ws['AZ1'] #Marcador en la celda AZ1
@@ -79,18 +73,13 @@ def button_lunes_jueves(wb):
   - BUSCARV desde INFORME SOLICITUDES a Hoja1 
     nombre completo en la columna H.
   - Listado de expertas sin servicio copiado en las 
-    columnas Q, R y S.
+    columnas M, N y O.
   """)
   abrir_excel(filepath_save)
 
 def button_viernes_sabado(wb):
   # Seleccionar la hoja de trabajo
   ws = wb.active
-
-  # Mensaje de confirmación para que el usuario sea consciente que de el listado de expertas fue copiado en la celda A5
-  confirmacion = messagebox.askyesno('Confirmar modificación', 'Asegurese de que el listado de expertas haya sido copiado en la celda A5 de la hoja "Hoja1", para evitar dañar el contenido del archivo. ¿Desea continuar?')
-  if not confirmacion:
-    return
     
   #buscar el marcador de modificación 
   marcador = ws['AZ1'] #Marcador en la celda AZ1
@@ -147,6 +136,6 @@ def button_viernes_sabado(wb):
   - BUSCARV desde INFORME SOLICITUDES a Hoja1 
     nombre completo en la columna H.
   - Listado de expertas sin servicio copiado en las 
-  columnas Q, R y S.
+  columnas M, N y O.
   """)
   abrir_excel(filepath_save)

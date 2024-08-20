@@ -137,8 +137,7 @@ def procesar_archivo_excel_viernes_sabado():
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-Label(root, text="Pegar todo el listado de expertas en la celda A5 de la hoja 'Hoja1'").pack(pady=10) 
-root.geometry('420x200')
+root.geometry('420x160')
 root.resizable(width=False, height=False)
 
 #Función para que el ícono de la ventana funcione correctamente en cojunto con el comando 
@@ -152,6 +151,6 @@ def recurso_path(relative_path):
 
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
-btn_procesar_archivo_excel = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel).pack(pady=20)
+btn_procesar_archivo_excel = tk.Button(root, text="Procesar Archivo Excel (Lunes-Jueves)", command=procesar_archivo_excel).pack(pady=20)
 btn_procesar_archivo_excel_viernes_sabado = tk.Button(root, text="Procesar Archivo Excel (Viernes-Sábado)", command=procesar_archivo_excel_viernes_sabado).pack(pady=20)
 root.mainloop() 
