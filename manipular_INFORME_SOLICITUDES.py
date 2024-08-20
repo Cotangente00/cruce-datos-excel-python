@@ -38,7 +38,7 @@ def delete_ciudades_columnas(ws):
         elif ciudad.lower() == 'soacha': #Sin importar si el valor está en mayusculas o en minusculas
             ws.cell(row=row, column=16).value = 'Soacha(Validar servicio)' # Columna P, pero con la eliminación de la columna M, pasa a ser la columna O
         elif ciudad == '' or None:
-            ws.cell(row=row, column=17).value = 'Ciudad vacía(Confirmar)' # Columna Q, pero con la eliminación de la columna M, pasa a ser la columna P
+            ws.cell(row=row, column=16).value = 'Ciudad vacía(Confirmar)' # Columna Q, pero con la eliminación de la columna M, pasa a ser la columna P
 
 
     # Columna a eliminar: ciudades una vez descartadas las que NO se necesitan

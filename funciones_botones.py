@@ -44,9 +44,6 @@ def button_lunes_jueves(wb):
   # Funciones que hacen los cambios en la Hoja1 
   ejecucion_funciones2(ws,ws2)
 
-
-  ws2['R2'] = 'Expertas que NO tienen servicio' 
-
   #Agregar marcador de que el archivo ha sido modificado por la aplicación en la celdd AZ1        
   ws2['AZ1'] = 'MODIFICADO' 
 
@@ -114,9 +111,6 @@ def button_viernes_sabado(wb):
 
   # Funciones que hacen los cambios en la Hoja1
   ejecucion_funciones2_viernes_sabado(ws,ws2)
-
-
-  ws2['R2'] = 'Expertas que NO tienen servicio' 
 
   #Agregar marcador de que el archivo ha sido modificado por la aplicación en la celda AZ1        
   ws2['AZ1'] = 'MODIFICADO' 
