@@ -273,8 +273,8 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=7, value=row[5])
         ws2.cell(row=i, column=8, value=row[6])
         ws2.cell(row=i, column=9, value=row[7])
-        ws2.cell(row=i, column=10, value=row[8])
-        ws2.cell(row=i, column=11, value=row[9])
+        ws2.cell(row=i, column=10, value=row[8]) # J
+        ws2.cell(row=i, column=11, value=row[9]) # K
         ws2.cell(row=i, column=12, value=row[10])
         ws2.cell(row=i, column=13, value=row[11])
         ws2.cell(row=i, column=14, value=row[12])

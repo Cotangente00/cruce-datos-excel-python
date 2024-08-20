@@ -1,8 +1,22 @@
 import openpyxl
 from manipular_INFORME_SOLICITUDES import *
+from manipular_Hoja1 import *
+from openpyxl import *
 # Cargar el archivo de Excel y seleccionar la hoja
 
-ordenar_tabla_por_columna_N(ws)
-# Guardar el archivo de Excel
-wb.save('result.xlsx')          
+wb = openpyxl.load_workbook('test.xlsx')
+ws = wb[wb.sheetnames[0]]
+
+ejecucion_funciones(ws)
+
+ws = wb[wb.sheetnames[1]]
+ws2 = wb[wb.sheetnames[0]]
+
+concatenar_nombres_apellidos(ws)
+delete_columns(ws)
+move_data_to_D5(ws)
+encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2)
+
+
+wb.save('result.xlsx')
 abrir_excel('result.xlsx')
