@@ -12,13 +12,28 @@ import os
 import xlwt
 from convert_xlsx_to_xls import *
 from funciones_weekend import *
-from funciones_botones import *
+from funciones_botones import *   
+import datetime
 
 '''------Función para Lunes a Jueves------'''
 def procesar_archivo_excel():
+
   filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
   if not filepath:
     return
+
+  # Obtener la fecha de creación del archivo
+  creation_time = os.path.getctime(filepath)
+  creation_date = datetime.datetime.fromtimestamp(creation_time)
+
+  # Verificar si el día de la semana es viernes o sábado
+  if creation_date.weekday() in [4,5]:  # 4: viernes y 5: sábado
+      if messagebox.askokcancel("Advertencia", "Ha seleccionado un archivo que pertenece a los días de la semana lunes, martes, miercoles o jueves. ¿Desea continuar?"):
+        # El usuario confirmó que desea continuar
+        pass  # Continuar con el procesamiento
+      else:
+        # El usuario canceló
+        return
 
   try:
 
@@ -76,9 +91,22 @@ def procesar_archivo_excel():
 
 '''------Función para Viernes a Sábado------'''
 def procesar_archivo_excel_viernes_sabado():
-  filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
+  filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar (viernes-sábado)", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
   if not filepath:
     return
+
+  # Obtener la fecha de creación del archivo
+  creation_time = os.path.getctime(filepath)
+  creation_date = datetime.datetime.fromtimestamp(creation_time)
+
+  # Verificar si el día de la semana es lunes, martes, miercoles o jueves
+  if creation_date.weekday() in [0,1,2,3]:  # 0: lunes, 1: martes, 2: miercoles y 3: jueves
+      if messagebox.askokcancel("Advertencia", "Ha seleccionado un archivo que pertenece a los días de la semana lunes, martes, miercoles o jueves. ¿Desea continuar?"):
+        # El usuario confirmó que desea continuar
+        pass  # Continuar con el procesamiento
+      else:
+        # El usuario canceló
+        return
 
   try:
 
