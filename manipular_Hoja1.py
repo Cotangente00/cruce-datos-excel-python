@@ -3,6 +3,7 @@ import xlrd
 import xlwt
 from xlutils.copy import copy
 from openpyxl.styles import NamedStyle
+from manipular_INFORME_SOLICITUDES import *
 
 
 '''------Concatenar nombres y apellidos------'''
@@ -100,8 +101,8 @@ def encontrar_y_mover_coincidencias_cedulas_y_nombres(ws,ws2):
 
             # Si se encuentra una coincidencia, copiar los datos a la hoja de informe
             if numero_documento_informe == numero_documento_hoja1:
-                fila_informe[12].value = fila_hoja1[3].value  # Columna M (índice 12)
-                fila_informe[13].value = fila_hoja1[4].value  # Columna N (índice 13)
+                fila_informe[13].value = fila_hoja1[3].value  # Columna M (índice 12)
+                fila_informe[14].value = fila_hoja1[4].value  # Columna N (índice 13)
 
 
 '''------Sección para buscar coincidencias de la hoja Hoja1------'''
@@ -149,9 +150,9 @@ def no_service_copypaste(ws,ws2):
 
     # Pegar los datos en la Hoja1, columnas M, N y O
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio, tipo_sin_servicio), start=1):
-        ws[f'M{start_row + i - 1}'] = cedula
-        ws[f'N{start_row + i - 1}'] = nombre
-        ws[f'O{start_row + i - 1}'] = tipo
+        ws[f'N{start_row + i - 1}'] = cedula
+        ws[f'O{start_row + i - 1}'] = nombre
+        ws[f'P{start_row + i - 1}'] = tipo
 
 
 
@@ -258,8 +259,8 @@ def organizar_tabla_alfabeticamente(ws2):
         columna_d.append(row[3])
         data.append([row[0], row[1], row[2]] + list(row[4:]))
 
-    # Ordenar los datos por la columna N (índice 12 en data, índice 13 en la hoja), colocando los valores None al final
-    data.sort(key=lambda x: (x[12] is None, x[12]))
+    # Ordenar los datos por la columna O (índice 13 en data, índice 14 en la hoja), colocando los valores None al final
+    data.sort(key=lambda x: (x[13] is None, x[13]))
 
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 2
     ws2.delete_rows(2, ws2.max_row)
@@ -273,11 +274,12 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=7, value=row[5])
         ws2.cell(row=i, column=8, value=row[6])
         ws2.cell(row=i, column=9, value=row[7])
-        ws2.cell(row=i, column=10, value=row[8]) # J
-        ws2.cell(row=i, column=11, value=row[9]) # K
+        ws2.cell(row=i, column=10, value=row[8])
+        ws2.cell(row=i, column=11, value=row[9]) 
         ws2.cell(row=i, column=12, value=row[10])
         ws2.cell(row=i, column=13, value=row[11])
         ws2.cell(row=i, column=14, value=row[12])
+        ws2.cell(row=i, column=15, value=row[13])
     
 
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
@@ -289,4 +291,5 @@ def ejecucion_funciones2(ws,ws2):
     organizar_tabla_alfabeticamente(ws2)
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    novedades_expertas(ws2)
 

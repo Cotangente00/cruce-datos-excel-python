@@ -114,9 +114,9 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
 
     # Pegar los datos en la Hoja1, columnas M, N y O
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio_horas, nombres_sin_servicio_horas, tipo_sin_servicio_horas), start=4):
-        ws[f'M{start_row + i - 1}'] = cedula
-        ws[f'N{start_row + i - 1}'] = nombre
-        ws[f'O{start_row + i - 1}'] = tipo
+        ws[f'N{start_row + i - 1}'] = cedula
+        ws[f'O{start_row + i - 1}'] = nombre
+        ws[f'P{start_row + i - 1}'] = tipo
 
 '''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xlsx)------'''
 def find_table_and_move_to_A5_xlsx_viernes_sabado(ws):
@@ -218,3 +218,4 @@ def ejecucion_funciones2_viernes_sabado(ws,ws2):
     organizar_tabla_alfabeticamente(ws2)
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste_viernes_sabado(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
+    novedades_expertas(ws2)
