@@ -106,12 +106,17 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
                 nombres_sin_servicio_horas.append(nombre)
                 tipo_sin_servicio_horas.append(tipo)
 
+    # Encontrar la última fila de la tabla existente (suponiendo que la columna L siempre tiene datos)
+    last_row = ws.max_row
 
-    # Pegar los datos en la Hoja1, columnas Q, R y S
+    # Calcular la fila inicial para la copia (15 filas después)
+    start_row = last_row + 10
+
+    # Pegar los datos en la Hoja1, columnas M, N y O
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio_horas, nombres_sin_servicio_horas, tipo_sin_servicio_horas), start=4):
-        ws[f'R{i}'] = cedula
-        ws[f'S{i}'] = nombre
-        ws[f'T{i}'] = tipo
+        ws[f'M{start_row + i - 1}'] = cedula
+        ws[f'N{start_row + i - 1}'] = nombre
+        ws[f'O{start_row + i - 1}'] = tipo
 
 '''------Función para encontrar la tabla y moverla a la celda A5 (solo para archivos .xlsx)------'''
 def find_table_and_move_to_A5_xlsx_viernes_sabado(ws):

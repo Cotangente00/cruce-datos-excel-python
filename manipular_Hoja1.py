@@ -141,11 +141,17 @@ def no_service_copypaste(ws,ws2):
             nombres_sin_servicio.append(nombre)
             tipo_sin_servicio.append(tipo)
 
-    # Pegar los datos en la Hoja1, columnas Q, R y S
+    # Encontrar la última fila de la tabla existente (suponiendo que la columna L siempre tiene datos)
+    last_row = ws.max_row
+
+    # Calcular la fila inicial para la copia (15 filas después)
+    start_row = last_row + 10
+
+    # Pegar los datos en la Hoja1, columnas M, N y O
     for i, (cedula, nombre, tipo) in enumerate(zip(cedulas_sin_servicio, nombres_sin_servicio, tipo_sin_servicio), start=1):
-        ws[f'R{i}'] = cedula
-        ws[f'S{i}'] = nombre
-        ws[f'T{i}'] = tipo
+        ws[f'M{start_row + i - 1}'] = cedula
+        ws[f'N{start_row + i - 1}'] = nombre
+        ws[f'O{start_row + i - 1}'] = tipo
 
 
 
