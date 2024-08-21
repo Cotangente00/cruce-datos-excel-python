@@ -27,13 +27,10 @@ def procesar_archivo_excel():
   creation_date = datetime.datetime.fromtimestamp(creation_time)
 
   # Verificar si el día de la semana es viernes o sábado
-  if creation_date.weekday() in [4,5]:  # 4: viernes y 5: sábado
-      if messagebox.askokcancel("Advertencia", "Ha seleccionado un archivo que pertenece a los días de la semana lunes, martes, miercoles o jueves. ¿Desea continuar?"):
-        # El usuario confirmó que desea continuar
-        pass  # Continuar con el procesamiento
-      else:
-        # El usuario canceló
-        return
+  if creation_date.weekday() in [4,5]: # 4: viernes y 5: sábado
+    error = messagebox.showerror("ERROR", "Ha seleccionado un archivo que pertenece a los días de la semana viernes o sábado. No es posible modificar este archivo")
+    if error:
+      return
 
   try:
 
@@ -101,12 +98,9 @@ def procesar_archivo_excel_viernes_sabado():
 
   # Verificar si el día de la semana es lunes, martes, miercoles o jueves
   if creation_date.weekday() in [0,1,2,3]:  # 0: lunes, 1: martes, 2: miercoles y 3: jueves
-      if messagebox.askokcancel("Advertencia", "Ha seleccionado un archivo que pertenece a los días de la semana lunes, martes, miercoles o jueves. ¿Desea continuar?"):
-        # El usuario confirmó que desea continuar
-        pass  # Continuar con el procesamiento
-      else:
-        # El usuario canceló
-        return
+    error = messagebox.showerror("ERROR", "Ha seleccionado un archivo que pertenece a los días de la semana lunes, martes, miercoles o jueves. No es posible modificar este archivo")
+    if error:
+      return
 
   try:
 
