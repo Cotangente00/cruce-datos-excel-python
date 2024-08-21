@@ -18,7 +18,7 @@ import datetime
 '''------Función para Lunes a Jueves------'''
 def procesar_archivo_excel():
 
-  filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
+  filepath = filedialog.askopenfilename(title="Selecciona el archivo Excel a modificar (lunes-jueves)", filetypes=[("Archivos Excel", "*.xlsx;*.xls")])
   if not filepath:
     return
 
