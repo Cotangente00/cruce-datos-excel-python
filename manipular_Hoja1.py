@@ -280,6 +280,7 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=13, value=row[11])
         ws2.cell(row=i, column=14, value=row[12])
         ws2.cell(row=i, column=15, value=row[13])
+        ws2.cell(row=i, column=16, value=row[14])
     
 
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
