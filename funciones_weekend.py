@@ -207,6 +207,25 @@ def find_table_and_move_to_A5_xls_viernes_sabado(file_path, temp):
     wb_wr.save(temp)
 
 
+'''------Función para organizar la tabla alfabéticamente de la hoja Hoja1, usando la columna H como índice o base del ordenamiento------'''
+def organizar_tabla_alfabeticamente_hoja1_weekend(ws):
+    # Obtener todos los datos de la hoja
+    data = []
+    for row in ws.iter_rows(min_row=5, values_only=True):
+        data.append(list(row))
+
+    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja), colocando los valores None al final
+    data.sort(key=lambda x: x[13] if x[13] is not None else '')
+    
+    # Limpiar la hoja y escribir los datos ordenados a partir de la fila 5
+    ws.delete_rows(5, ws.max_row)
+    for i, row in enumerate(data, start=5):  # en el indice 5
+        ws.cell(row=i, column=4, value=row[3])
+        ws.cell(row=i, column=5, value=row[4])
+        ws.cell(row=i, column=6, value=row[5])
+        ws.cell(row=i, column=7, value=row[6])
+        ws.cell(row=i, column=8, value=row[7])
+
 
 
 '''------Función que globaliza todas las funciones anteriormenete definidas (VIERNES-SÁBADO)-------'''
@@ -219,3 +238,4 @@ def ejecucion_funciones2_viernes_sabado(ws,ws2):
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste_viernes_sabado(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     novedades_expertas(ws2)
+    organizar_tabla_alfabeticamente_hoja1_weekend(ws)
