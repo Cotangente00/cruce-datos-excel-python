@@ -246,7 +246,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
 
 
 
-'''------Función para organizar la tabla alfabéticamente, usando la columna N como índice o base del ordenamiento------'''
+'''------Función para organizar la tabla alfabéticamente de la hoja INFORME SOLICITUDES, usando la columna N como índice o base del ordenamiento------'''
 def organizar_tabla_alfabeticamente(ws2):
     # Obtener el estilo de fecha predeterminado (formato DD/MM/YYYY)
     date_style = NamedStyle(name="date_style", number_format="DD/MM/YYYY")
@@ -283,6 +283,25 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=16, value=row[14])
     
 
+'''------Función para organizar la tabla alfabéticamente de la hoja Hoja1, usando la columna H como índice o base del ordenamiento------'''
+def organizar_tabla_alfabeticamente_hoja1(ws):
+    # Obtener todos los datos de la hoja
+    data = []
+    for row in ws.iter_rows(min_row=5, values_only=True):
+        data.append(list(row))
+
+    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja), colocando los valores None al final
+    data.sort(key=lambda x: x[7] if x[7] is not None else '')
+
+    # Limpiar la hoja y escribir los datos ordenados a partir de la fila 5
+    ws.delete_rows(5, ws.max_row)
+    for i, row in enumerate(data, start=5):  # en el indice 5
+        ws.cell(row=i, column=4, value=row[3])
+        ws.cell(row=i, column=5, value=row[4])
+        ws.cell(row=i, column=6, value=row[5])
+        ws.cell(row=i, column=8, value=row[7])
+        
+
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
 def ejecucion_funciones2(ws,ws2):
     concatenar_nombres_apellidos(ws)
@@ -293,4 +312,7 @@ def ejecucion_funciones2(ws,ws2):
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     novedades_expertas(ws2)
+    organizar_tabla_alfabeticamente_hoja1(ws)
+
+
 
