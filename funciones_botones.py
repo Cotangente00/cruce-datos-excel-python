@@ -51,11 +51,11 @@ def button_lunes_jueves(wb):
   messagebox.showinfo("Proceso completado", """
   • Cambios en la hoja "INFORME SOLICITUDES":
   - Se eliminaron las filas 1, 2, 3, y 4.
-  - Total servicios, Tipo, Turno partido, Jornada fija, 
-    Concepto: novedad y ausencias, Concepto: novedad 
-    control empleados, CC experta cambios, Experta cambio,
-    Notificación SMS, Notificación SMS cliente, SMS 
-    enviado cliente. Columnas eliminadas.
+  - Columnas eliminadas: Total servicios, Tipo, Turno 
+    partido, Jornada fija, Concepto: novedad y ausencias, 
+    Concepto: novedad control empleados, CC experta 
+    cambios, Experta cambio, Notificación SMS, 
+    Notificación SMS cliente, SMS enviado cliente. 
   - Formato de fecha conservado DD/MM/YYYY.
   - Tamaño horizontal de las columnas adaptado.
   - Solicitud, Referencia Externa y Cédula modificada a 
@@ -64,8 +64,8 @@ def button_lunes_jueves(wb):
     amarillo.
   • Cambios en la hoja "Hoja1":
   - Nombres y apellidos concatendados.
-  - Fecha, Sexo, localidad, número de celular y 
-    TCVA eliminadas.
+  - Columnas eliminadas: Fecha, Sexo, localidad, número 
+    de celular y TCVA eliminadas.
   - Datos trasladados a la celda D5.
   - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
     número de documento y nombre completo en 
@@ -114,11 +114,11 @@ def button_viernes_sabado(wb):
   messagebox.showinfo("Proceso completado", """
   • Cambios en la hoja "INFORME SOLICITUDES":
   - Se eliminaron las filas 1, 2, 3, y 4.
-  - Total servicios, Tipo, Turno partido, Jornada fija, 
-    Concepto: novedad y ausencias, Concepto: novedad 
-    control empleados, CC experta cambios, Experta cambio,
-    Notificación SMS, Notificación SMS cliente, SMS 
-    enviado cliente. Columnas eliminadas.
+  - Columnas eliminadas: Total servicios, Tipo, Turno 
+    partido, Jornada fija, Concepto: novedad y ausencias, 
+    Concepto: novedad control empleados, CC experta 
+    cambios, Experta cambio, Notificación SMS, 
+    Notificación SMS cliente, SMS enviado cliente. 
   - Formato de fecha conservado DD/MM/YYYY.
   - Tamaño horizontal de las columnas adaptado.
   - Solicitud, Referencia Externa y Cédula modificada a 
@@ -127,8 +127,8 @@ def button_viernes_sabado(wb):
     amarillo.
   • Cambios en la hoja "Hoja1":
   - Nombres y apellidos concatendados.
-  - Fecha, Sexo, localidad, número de celular y 
-    TCVA eliminadas.
+  - Columnas eliminadas: Fecha, Sexo, localidad, número 
+    de celular y TCVA eliminadas.
   - Datos trasladados a la celda D5.
   - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
     número de documento y nombre completo en 
