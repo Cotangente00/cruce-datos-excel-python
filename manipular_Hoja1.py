@@ -261,6 +261,7 @@ def organizar_tabla_alfabeticamente(ws2):
 
     # Ordenar los datos por la columna O (índice 13 en data, índice 14 en la hoja), colocando los valores None al final
     data.sort(key=lambda x: (x[13] is None, x[13]))
+    font = Font(bold=True, underline='single')
 
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 2
     ws2.delete_rows(2, ws2.max_row)
@@ -281,6 +282,8 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=14, value=row[12])
         ws2.cell(row=i, column=15, value=row[13])
         ws2.cell(row=i, column=16, value=row[14])
+        ws2.cell(row=i, column=16, value=row[14]).font = font
+
     
 
 '''------Función para organizar la tabla alfabéticamente de la hoja Hoja1, usando la columna H como índice o base del ordenamiento------'''
