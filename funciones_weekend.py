@@ -101,7 +101,7 @@ def no_service_copypaste_viernes_sabado(ws,ws2):
             cedulas_sin_servicio.append(cedula)
             nombres_sin_servicio.append(nombre)
             tipo_sin_servicio.append(tipo)
-            if horas == 120 or horas == 240 or horas == 235:
+            if horas == 120 or horas == 235 or horas == 240:
                 cedulas_sin_servicio_horas.append(cedula)
                 nombres_sin_servicio_horas.append(nombre)
                 tipo_sin_servicio_horas.append(tipo)
@@ -208,14 +208,14 @@ def find_table_and_move_to_A5_xls_viernes_sabado(file_path, temp):
 
 
 '''------Función para organizar la tabla alfabéticamente de la hoja Hoja1, usando la columna H como índice o base del ordenamiento------'''
-'''
+
 def organizar_tabla_alfabeticamente_hoja1_weekend(ws):
     # Obtener todos los datos de la hoja
     data = []
     for row in ws.iter_rows(min_row=5, values_only=True):
         data.append(list(row))
 
-    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja), colocando los valores None al final
+    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja)
     data.sort(key=lambda x: x[7] if x[7] is not None else '')
     
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 5
@@ -226,7 +226,7 @@ def organizar_tabla_alfabeticamente_hoja1_weekend(ws):
         ws.cell(row=i, column=6, value=row[5])
         ws.cell(row=i, column=7, value=row[6])
         ws.cell(row=i, column=8, value=row[7])
-'''
+
 
 
 '''------Función que globaliza todas las funciones anteriormenete definidas (VIERNES-SÁBADO)-------'''
@@ -239,3 +239,4 @@ def ejecucion_funciones2_viernes_sabado(ws,ws2):
     encontrar_y_mover_coincidencias_nombres(ws,ws2)
     no_service_copypaste_viernes_sabado(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     novedades_expertas(ws2)
+    organizar_tabla_alfabeticamente_hoja1_weekend(ws)
