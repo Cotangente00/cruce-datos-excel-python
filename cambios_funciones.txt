@@ -62,10 +62,13 @@ Esta función filtra todas las expertas de la Hoja1 que NO tienen servicio e ins
 i. Función no_service_copypaste_viernes_sabado
 Misma función, solo que vuelve a filtrar los datos ya filtrado por la condición de la columna servicio, esta vez la condición es que la columna "horas" esté dentro del rango requerido.
 
-j. Función ejecucion_funciones2
+j. Funciones organizar_tabla_alfabeticamente y organizar_tabla_alfabeticamente_hoja1 estas funciones se encargan de organizar las tablas de cada hoja alfabéticamente. En el caso de la hoja INFORME SOLICITUDES, la función utiliza la columna N como el índice o base del ordenamiento para el resto de la tabla, dejando todas las filas que contienen valores de "None" o vacías al final de la tabla.
+En el caso de la hoja Hoja1, la función hace casi exactamente lo mismo, solo que para el caso de esta hoja, la función utiliza como índice o base del ordenamiento, la columna H, a diferencia de la hoja anterior, aquí lo valores None, o todas las filas vacías se colocan al principio de la tabla, para que las gestoras puedan visualizar de mejor manera la tabla.
+
+k. Función ejecucion_funciones2
 Esta función se encarga de ejecutar todas las funciones anteriormente mencionadas en un orden específico para evitar modificaciones que puedan modificar el archivo de forma negativa.
 
-k. Función ejecucion_funciones2_viernes_sabado
+l. Función ejecucion_funciones2_viernes_sabado
 Misma funcionalidad de la función "ejecucion_funciones2", solo que ahora con las funciones que están adaptadas para los días viernes-sabado 
 
 

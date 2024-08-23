@@ -136,7 +136,7 @@ def abrir_excel(filepath):
     except OSError as e:
         print(f"No se pudo abrir el archivo '{filepath}': {e}")
 
-
+'''------Función que globaliza todas las funciones anteriores------'''
 def ejecucion_funciones(ws):
     delete_filas(ws)
     delete_ciudades_columnas(ws)

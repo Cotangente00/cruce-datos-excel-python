@@ -208,7 +208,6 @@ def find_table_and_move_to_A5_xls_viernes_sabado(file_path, temp):
 
 
 '''------Función para organizar la tabla alfabéticamente de la hoja Hoja1, usando la columna H como índice o base del ordenamiento------'''
-
 def organizar_tabla_alfabeticamente_hoja1_weekend(ws):
     # Obtener todos los datos de la hoja
     data = []
