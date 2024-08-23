@@ -112,8 +112,8 @@ def novedades_expertas(ws):
     # Color de fondo amarillo
     relleno_amarillo = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-    # Recorrer las filas (empezando desde la quinta fila por los encabezados)
-    for fila in ws.iter_rows(min_row=5, min_col=10, max_col=11):  # Columnas N (14) y O (15)
+    # Recorrer las filas (empezando desde la segunda fila por los encabezados)
+    for fila in ws.iter_rows(min_row=2, min_col=10, max_col=11):  # Columnas N (14) y O (15)
         novedad = ws.cell(row=fila[0].row, column=13).value  # Columna M (13)
 
         # Verificar si la columna "novedad" es "Si"
