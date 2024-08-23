@@ -293,7 +293,7 @@ def organizar_tabla_alfabeticamente_hoja1(ws):
     for row in ws.iter_rows(min_row=5, values_only=True):
         data.append(list(row))
 
-    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja), colocando los valores None al final
+    # Ordenar los datos por la columna H (índice 7 en data, índice 8 en la hoja)
     data.sort(key=lambda x: x[7] if x[7] is not None else '')
 
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 5
