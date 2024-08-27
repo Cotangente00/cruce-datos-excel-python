@@ -71,6 +71,9 @@ Esta función se encarga de ejecutar todas las funciones anteriormente mencionad
 l. Función ejecucion_funciones2_viernes_sabado
 Misma funcionalidad de la función "ejecucion_funciones2", solo que ahora con las funciones que están adaptadas para los días viernes-sabado 
 
+m. Función intro_function_lunes_jueves y intro_function_viernes_sabado respectivamente
+Esta función se encarga de ejecutar toda la lógica entera del botón, aligerando así el archivo de la GUI de tanta línea de código
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Función que globaliza todas las funciones: procesar_archivo_excel
@@ -89,3 +92,4 @@ e. Marcadores, se un marcador para el listado de las expertas que no tienen serv
 f. Guardar nuevo archivo, se abre una ventana del explorador de Windows para que el usuario pueda elegir a su conveniencia la ruta y nombrar este nuevo archivo generado.
 
 g. Una vez guardados los cambios, se abre una ventana informativa con todos los cambios generales ejecutados, para posteriormente la apartura del archivo de forma automática.
+
