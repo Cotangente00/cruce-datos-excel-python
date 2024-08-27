@@ -282,12 +282,11 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=15, value=row[13])
         ws2.cell(row=i, column=16, value=row[14])
 
-    column = ws2['O']
+    column = ws2['P']
 
     for cell in column:
         if cell.value:
-            cell.font = cell.font.copy(bold=True)
-            cell.style = 'Currency'  # Aplicar formato de moneda para subrayado
+            cell.font = cell.font.copy(bold=True, underline="single")
 
     
 

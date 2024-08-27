@@ -28,7 +28,7 @@ def delete_ciudades_columnas(ws):
         # Eliminar la columna utilizando el índice
         ws.delete_cols(col_idx)
 
-    ciudades_permitidas = ['Bogotá', 'Bogota', 'BOGOTA', 'BOGOTÁ', 'Cajica', 'Cajicá', 'CAJICA', 'CAJICÁ', 'Chía', 'CHÍA', 'Chia', 'CHIA', 'Cota', 'COTA', 'Soacha', 'SOACHA', '']
+    ciudades_permitidas = ['Bogotá', 'bogota', 'bogotá', 'Bogota', 'BOGOTA', 'BOGOTÁ', 'Cajica', 'Cajicá', 'cajica', 'cajicá', 'CAJICA', 'CAJICÁ', 'Chía', 'CHÍA', 'Chia', 'CHIA', 'chia', 'chía', 'Cota', 'COTA', 'cota', 'Soacha', 'SOACHA', 'soacha', '']
 
     # Recorrer las filas en orden inverso para evitar problemas al eliminar filas
     for row in range(ws.max_row, 1, -1):
