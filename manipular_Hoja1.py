@@ -261,7 +261,6 @@ def organizar_tabla_alfabeticamente(ws2):
 
     # Ordenar los datos por la columna O (índice 13 en data, índice 14 en la hoja), colocando los valores None al final
     data.sort(key=lambda x: (x[13] is None, x[13]))
-    font = Font(bold=True, underline='single')
 
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 2
     ws2.delete_rows(2, ws2.max_row)
@@ -282,7 +281,12 @@ def organizar_tabla_alfabeticamente(ws2):
         ws2.cell(row=i, column=14, value=row[12])
         ws2.cell(row=i, column=15, value=row[13])
         ws2.cell(row=i, column=16, value=row[14])
-        ws2.cell(row=i, column=16, value=row[14]).font = font
+
+    column = ws2['P']
+
+    for cell in column:
+        if cell.value:
+            cell.font = cell.font.copy(bold=True, underline="single")
 
     
 
@@ -304,6 +308,20 @@ def organizar_tabla_alfabeticamente_hoja1(ws):
         ws.cell(row=i, column=6, value=row[5])
         ws.cell(row=i, column=8, value=row[7])
         
+
+def formatear_columna_o(ws2):
+    data = []
+
+    # Encontrar la última fila de la tabla existente (suponiendo que la columna L siempre tiene datos)
+    last_row = ws2.max_row
+
+    for row in ws2.iter_rows(min_row=2, max_row=last_row, values_only=True):
+        o = ws2['O'] # Columna O 
+        data.append(o)
+        if o is None or o == "":
+            for cell in o:
+                cell.font = cell.font.copy(bold=False, underline="none")
+
 
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
 def ejecucion_funciones2(ws,ws2):

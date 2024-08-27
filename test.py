@@ -15,7 +15,7 @@ ejecucion_funciones(ws)
 ws = wb[wb.sheetnames[1]]
 ws2 = wb[wb.sheetnames[0]]
 
-ejecucion_funciones2_viernes_sabado(ws,ws2)
+ejecucion_funciones2(ws,ws2)
 
 
 
