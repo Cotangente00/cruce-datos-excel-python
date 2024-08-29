@@ -167,6 +167,9 @@ def find_table_and_move_to_A5_xlsx(ws):
             if cell.value is not None:
                 inicio_fila = cell.row
                 inicio_columna = cell.column
+                if inicio_fila < 1000:
+                    ws.delete_rows(inicio_fila, 1)  
+                    ws.delete_cols(inicio_columna, 1)  
                 break
         if inicio_fila:        
             break
@@ -222,7 +225,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
     # Obtener los datos de la tabla
     datos_tabla = []
     for row_idx in range(inicio_fila, ws_rd.nrows):
-        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 11)
+        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 20)
         if all(cell in (None, '') for cell in fila_datos):
             break
         datos_tabla.append(fila_datos)
