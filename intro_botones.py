@@ -42,6 +42,12 @@ def intro_function_lunes_jueves(filepath):
 
             os.remove('temp.xls')
 
+            ws = wb[wb.sheetnames[1]]
+            a5 = ws['A5']
+            if a5.value < 1000:
+                ws.delete_rows(a5.row, 1)
+                ws.delete_cols(a5.column, 1)
+
         elif filepath.endswith('.xls'):
 
             find_table_and_move_to_A5_xls(filepath, 'temp.xls')
@@ -65,19 +71,10 @@ def intro_function_lunes_jueves(filepath):
             os.remove('temp.xls')
         
             ws = wb[wb.sheetnames[1]]
-            inicio_fila = None
-            inicio_columna = None
-            for fila in ws.iter_rows(min_row=1, max_col=ws.max_column):
-                for cell in fila:
-                    if cell.value is not None:
-                        inicio_fila = cell.row
-                        inicio_columna = cell.column
-                        if inicio_fila < 1000:
-                            ws.delete_rows(inicio_fila, 1)  
-                            ws.delete_cols(inicio_columna, 1)  
-                        break
-                if inicio_fila:        
-                    break 
+            a5 = ws['A5']
+            if a5.value < 1000:
+                ws.delete_rows(a5.row, 1)
+                ws.delete_cols(a5.column, 1)
 
         button_lunes_jueves(wb)
 
