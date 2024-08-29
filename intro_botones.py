@@ -61,6 +61,9 @@ def intro_function_lunes_jueves(filepath):
 
             # Eliminar la hoja predeterminada de Workbook
             wb.remove(wb.active)
+
+            os.remove('temp.xls')
+        
             ws = wb[wb.sheetnames[1]]
             inicio_fila = None
             inicio_columna = None
@@ -74,10 +77,7 @@ def intro_function_lunes_jueves(filepath):
                             ws.delete_cols(inicio_columna, 1)  
                         break
                 if inicio_fila:        
-                    break
-
-            os.remove('temp.xls')
-      
+                    break 
 
         button_lunes_jueves(wb)
 

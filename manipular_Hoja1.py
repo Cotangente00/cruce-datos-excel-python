@@ -225,7 +225,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
     # Obtener los datos de la tabla
     datos_tabla = []
     for row_idx in range(inicio_fila, ws_rd.nrows):
-        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 20)
+        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 12)
         if all(cell in (None, '') for cell in fila_datos):
             break
         datos_tabla.append(fila_datos)
@@ -236,7 +236,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
 
     # Limpiar la tabla existente
     for row_idx in range(inicio_fila, inicio_fila + len(datos_tabla)):
-        for col_idx in range(inicio_columna, inicio_columna + 11):
+        for col_idx in range(inicio_columna, inicio_columna + 12):
             ws_wr.write(row_idx, col_idx, '')
 
     # Colocar los datos a partir de A5
