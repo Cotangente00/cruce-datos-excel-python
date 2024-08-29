@@ -13,6 +13,37 @@ import xlwt
 from convert_xlsx_to_xls import *
 from funciones_weekend import *
 
+def message_success():
+  # Mensaje de éxito
+  exito = messagebox.showinfo("Proceso completado", """
+          • Cambios en la hoja "INFORME SOLICITUDES":
+          - Se eliminaron las filas 1, 2, 3, y 4.
+          - Columnas eliminadas: Total servicios, Tipo, Turno 
+            partido, Jornada fija, Concepto: novedad y ausencias, 
+            Concepto: novedad control empleados, CC experta 
+            cambios, Experta cambio, Notificación SMS, 
+            Notificación SMS cliente, SMS enviado cliente. 
+          - Formato de fecha conservado DD/MM/YYYY.
+          - Tamaño horizontal de las columnas adaptado.
+          - Solicitud, Referencia Externa y Cédula modificada a 
+            formato numérico.
+          - Expertas que SI tienen novedad, resaltadas con color 
+            amarillo.
+          • Cambios en la hoja "Hoja1":
+          - Nombres y apellidos concatendados.
+          - Columnas eliminadas: Fecha, Sexo, localidad, número 
+            de celular y TCVA eliminadas.
+          - Datos trasladados a la celda D5.
+          - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
+            número de documento y nombre completo en 
+            las columnas M y N.
+          - BUSCARV desde INFORME SOLICITUDES a Hoja1 
+            nombre completo en la columna H.
+          - Listado de expertas sin servicio copiado en las 
+            columnas M, N y O.
+          """)
+
+
 
 def button_lunes_jueves(wb):
   # Seleccionar la hoja de trabajo
@@ -48,33 +79,7 @@ def button_lunes_jueves(wb):
 
   # Guardar el archivo modificado
   wb.save(filepath_save)
-  messagebox.showinfo("Proceso completado", """
-  • Cambios en la hoja "INFORME SOLICITUDES":
-  - Se eliminaron las filas 1, 2, 3, y 4.
-  - Columnas eliminadas: Total servicios, Tipo, Turno 
-    partido, Jornada fija, Concepto: novedad y ausencias, 
-    Concepto: novedad control empleados, CC experta 
-    cambios, Experta cambio, Notificación SMS, 
-    Notificación SMS cliente, SMS enviado cliente. 
-  - Formato de fecha conservado DD/MM/YYYY.
-  - Tamaño horizontal de las columnas adaptado.
-  - Solicitud, Referencia Externa y Cédula modificada a 
-    formato numérico.
-  - Expertas que SI tienen novedad, resaltadas con color 
-    amarillo.
-  • Cambios en la hoja "Hoja1":
-  - Nombres y apellidos concatendados.
-  - Columnas eliminadas: Fecha, Sexo, localidad, número 
-    de celular y TCVA eliminadas.
-  - Datos trasladados a la celda D5.
-  - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
-    número de documento y nombre completo en 
-    las columnas M y N.
-  - BUSCARV desde INFORME SOLICITUDES a Hoja1 
-    nombre completo en la columna H.
-  - Listado de expertas sin servicio copiado en las 
-    columnas M, N y O.
-  """)
+  message_success()
   abrir_excel(filepath_save)
 
 def button_viernes_sabado(wb):
@@ -111,31 +116,5 @@ def button_viernes_sabado(wb):
 
   # Guardar el archivo modificado
   wb.save(filepath_save)
-  messagebox.showinfo("Proceso completado", """
-  • Cambios en la hoja "INFORME SOLICITUDES":
-  - Se eliminaron las filas 1, 2, 3, y 4.
-  - Columnas eliminadas: Total servicios, Tipo, Turno 
-    partido, Jornada fija, Concepto: novedad y ausencias, 
-    Concepto: novedad control empleados, CC experta 
-    cambios, Experta cambio, Notificación SMS, 
-    Notificación SMS cliente, SMS enviado cliente. 
-  - Formato de fecha conservado DD/MM/YYYY.
-  - Tamaño horizontal de las columnas adaptado.
-  - Solicitud, Referencia Externa y Cédula modificada a 
-    formato numérico.
-  - Expertas que SI tienen novedad, resaltadas con color 
-    amarillo.
-  • Cambios en la hoja "Hoja1":
-  - Nombres y apellidos concatendados.
-  - Columnas eliminadas: Fecha, Sexo, localidad, número 
-    de celular y TCVA eliminadas.
-  - Datos trasladados a la celda D5.
-  - BUSCARV desde Hoja1 a INFORME SOLICITUDES 
-    número de documento y nombre completo en 
-    las columnas M y N.
-  - BUSCARV desde INFORME SOLICITUDES a Hoja1 
-    nombre completo en la columna H.
-  - Listado de expertas sin servicio copiado en las 
-  columnas M, N y O.
-  """)
+  message_success()
   abrir_excel(filepath_save)
