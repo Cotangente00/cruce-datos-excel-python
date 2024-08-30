@@ -303,20 +303,6 @@ def organizar_tabla_alfabeticamente_hoja1(ws):
         ws.cell(row=i, column=5, value=row[4])
         ws.cell(row=i, column=6, value=row[5])
         ws.cell(row=i, column=8, value=row[7])
-        
-
-def formatear_columna_o(ws2):
-    data = []
-
-    # Encontrar la última fila de la tabla existente (suponiendo que la columna L siempre tiene datos)
-    last_row = ws2.max_row
-
-    for row in ws2.iter_rows(min_row=2, max_row=last_row, values_only=True):
-        o = ws2['O'] # Columna O 
-        data.append(o)
-        if o is None or o == "":
-            for cell in o:
-                cell.font = cell.font.copy(bold=False, underline="none")
 
 
 '''------Función que globaliza todas las funciones anteriormente definidas (LUNES-JUEVES)-------'''
