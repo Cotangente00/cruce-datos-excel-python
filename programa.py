@@ -43,7 +43,7 @@ def procesar_archivo_excel():
 # Configurar la interfaz gráfica
 root = tk.Tk()
 root.wm_title("Informe Solicitudes y Expertas Disponibles")
-root.geometry('420x120')
+root.geometry('420x80')
 root.resizable(width=False, height=False)
 
 #Función para que el ícono de la ventana funcione correctamente en cojunto con el comando 
@@ -58,5 +58,4 @@ def recurso_path(relative_path):
 icon_path = recurso_path('icon.ico')
 root.iconbitmap(icon_path)
 btn_procesar_archivo_excel = tk.Button(root, text="Procesar Archivo Excel", command=procesar_archivo_excel).pack(pady=20)
-Label(root, text="ASEGURESE DE COPIAR LA TABLA DE EXPERTAS SIN ENCABEZADOS").pack()
 root.mainloop() 

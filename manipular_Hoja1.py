@@ -45,10 +45,6 @@ def delete_columns(ws):
 
 '''------Mover datos a D5------'''
 def move_data_to_D5(ws):
-    ws.column_dimensions['E'].width = 45
-    ws.column_dimensions['D'].width = 12
-    ws.column_dimensions['F'].width = 18
-    ws.column_dimensions['H'].width = 45
 
     cedula_copiar = []
     profesional_copiar = []
@@ -178,14 +174,14 @@ def find_table_and_move_to_A5_xlsx(ws):
     
     # Obtener los datos de la tabla
     datos_tabla = []
-    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 10):
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 11):
         fila_datos = [cell.value for cell in fila]
         if all(cell is None for cell in fila_datos):
             break
         datos_tabla.append(fila_datos)
     
     # Limpiar la tabla existente
-    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 10):
+    for fila in ws.iter_rows(min_row=inicio_fila, min_col=inicio_columna, max_col=inicio_columna + 11):
         for cell in fila:
             cell.value = None
     
@@ -222,7 +218,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
     # Obtener los datos de la tabla
     datos_tabla = []
     for row_idx in range(inicio_fila, ws_rd.nrows):
-        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 11)
+        fila_datos = ws_rd.row_values(row_idx, start_colx=inicio_columna, end_colx=inicio_columna + 12)
         if all(cell in (None, '') for cell in fila_datos):
             break
         datos_tabla.append(fila_datos)
@@ -233,7 +229,7 @@ def find_table_and_move_to_A5_xls(file_path, temp):
 
     # Limpiar la tabla existente
     for row_idx in range(inicio_fila, inicio_fila + len(datos_tabla)):
-        for col_idx in range(inicio_columna, inicio_columna + 11):
+        for col_idx in range(inicio_columna, inicio_columna + 12):
             ws_wr.write(row_idx, col_idx, '')
 
     # Colocar los datos a partir de A5
@@ -334,6 +330,8 @@ def ejecucion_funciones2(ws,ws2):
     no_service_copypaste(ws2,ws) #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     novedades_expertas(ws2)
     organizar_tabla_alfabeticamente_hoja1(ws)
+    ajustar_tamaño_columnas(ws)
+    ajustar_tamaño_columnas(ws2)
 
 
 

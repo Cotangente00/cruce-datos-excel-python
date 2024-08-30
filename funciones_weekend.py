@@ -26,10 +26,6 @@ def delete_columns_viernes_sabado(ws):
 
 '''------Mover datos a D5------'''
 def move_data_to_D5_viernes_sabado(ws):
-    ws.column_dimensions['E'].width = 45
-    ws.column_dimensions['D'].width = 12
-    ws.column_dimensions['F'].width = 18
-    ws.column_dimensions['H'].width = 45
 
     cedula_copiar = []
     profesional_copiar = []
@@ -239,3 +235,5 @@ def ejecucion_funciones2_viernes_sabado(ws,ws2):
     no_service_copypaste_viernes_sabado(ws2,ws)  #argumentos de hojas invertidos para mayor comodidad (originalmente ws es INFORME SOLICITUDES y ws2 es Hoja1)
     novedades_expertas(ws2)
     organizar_tabla_alfabeticamente_hoja1_weekend(ws)
+    ajustar_tamaño_columnas(ws)
+    ajustar_tamaño_columnas(ws2)
