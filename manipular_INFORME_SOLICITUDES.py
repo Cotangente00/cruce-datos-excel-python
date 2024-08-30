@@ -28,14 +28,14 @@ def delete_ciudades_columnas(ws):
         # Eliminar la columna utilizando el índice
         ws.delete_cols(col_idx)
 
-    ciudades_permitidas = ['Bogotá', 'bogota', 'bogotá', 'Bogota', 'BOGOTA', 'BOGOTÁ', 'Cajica', 'Cajicá', 'cajica', 'cajicá', 'CAJICA', 'CAJICÁ', 'Chía', 'CHÍA', 'Chia', 'CHIA', 'chia', 'chía', 'Cota', 'COTA', 'cota', 'Soacha', 'SOACHA', 'soacha', '']
+    ciudades_permitidas = {'bogotá', 'cajica', 'chía', 'cota', 'soacha', 'bogota', 'cajicá', 'chia'}
 
     # Recorrer las filas en orden inverso para evitar problemas al eliminar filas
     for row in range(ws.max_row, 1, -1):
-        ciudad = ws.cell(row=row, column=13).value # Obtener el valor de la Columna M (número 13) 
-        if ciudad not in ciudades_permitidas:
+        ciudad = ws.cell(row=row, column=13).value.lower() # Obtener el valor de la Columna M (número 13) 
+        if ciudad not in ciudades_permitidas and ciudad != '':
             ws.delete_rows(row, 1)
-        elif ciudad.lower() == 'soacha': #Sin importar si el valor está en mayusculas o en minusculas
+        elif ciudad == 'soacha': #Sin importar si el valor está en mayusculas o en minusculas
             ws.cell(row=row, column=17).value = 'Soacha(Validar servicio)' # Columna P, pero con la eliminación de la columna M, pasa a ser la columna O
         elif ciudad == '' or None:
             ws.cell(row=row, column=17).value = 'Ciudad vacía(Confirmar)' # Columna Q, pero con la eliminación de la columna M, pasa a ser la columna P
