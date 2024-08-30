@@ -62,19 +62,6 @@ def date_format(ws):
 
 '''------Sección para modificar el tamaño de las columnas y el aspecto------'''
 def styles_columnSize(ws):
-    ws.column_dimensions['A'].width = 13
-    ws.column_dimensions['B'].width = 20
-    ws.column_dimensions['C'].width = 13
-    ws.column_dimensions['D'].width = 13
-    ws.column_dimensions['E'].width = 55
-    ws.column_dimensions['H'].width = 15
-    ws.column_dimensions['F'].width = 50
-    ws.column_dimensions['I'].width = 55
-    ws.column_dimensions['J'].width = 22
-    ws.column_dimensions['K'].width = 45
-    ws.column_dimensions['M'].width = 18
-    ws.column_dimensions['L'].width = 12
-    ws.column_dimensions['N'].width = 45
     ws.row_dimensions[1].height= 20
 
     fila = 1
@@ -135,6 +122,28 @@ def abrir_excel(filepath):
         os.startfile(filepath)
     except OSError as e:
         print(f"No se pudo abrir el archivo '{filepath}': {e}")
+
+
+'''------Función para ajustar el tamaño horizontal de las columnas de forma automática------'''
+
+def ajustar_tamaño_columnas(ws):
+    max_width = 200
+
+    for column in ws.columns:
+            max_length = 0
+            column = column[0:]  
+            for cell in column:
+                try:  # Manejar posibles errores de tipo
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+
+            adjusted_width = min(max_length + 4, max_width) if max_width else max_length + 4
+            # Obtener la letra de la columna a partir del objeto columna
+            column_letter = column[0].column_letter
+            # Ajustar el ancho de la columna usando el nombre de la columna
+            ws.column_dimensions[column_letter].width = adjusted_width
 
 '''------Función que globaliza todas las funciones anteriores------'''
 def ejecucion_funciones(ws):
