@@ -255,7 +255,7 @@ def organizar_tabla_alfabeticamente(ws2):
         columna_d.append(row[3])
         data.append([row[0], row[1], row[2]] + list(row[4:]))
 
-    # Ordenar los datos por la columna O (índice 13 en data, índice 14 en la hoja), colocando los valores None al final
+    # Ordenar los datos por la columna N (índice 13 en data, índice 14 en la hoja), colocando los valores None al final
     data.sort(key=lambda x: (x[13] is None, x[13]))
 
     # Limpiar la hoja y escribir los datos ordenados a partir de la fila 2
